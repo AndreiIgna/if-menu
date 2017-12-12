@@ -47,7 +47,7 @@ class If_Menu {
 		if (is_admin()) {
 			add_action('admin_enqueue_scripts', 'If_Menu::admin_init');
 			add_action('wp_update_nav_menu_item', 'If_Menu::wp_update_nav_menu_item', 10, 2);
-			add_filter('wp_edit_nav_menu_walker', 'If_Menu::customWalker'); 
+			add_filter('wp_edit_nav_menu_walker', 'If_Menu::customWalker');
 			add_action('wp_nav_menu_item_custom_fields', 'If_Menu::menu_item_fields');
 			add_action('wp_nav_menu_item_custom_title', 'If_Menu::menu_item_title');
 			add_action('init', 'If_Menu::saveSettings');
@@ -144,8 +144,8 @@ class If_Menu {
 		global $pagenow;
 
 		if ($pagenow == 'nav-menus.php' || $pagenow == 'themes.php') {
-			wp_enqueue_script('if-menu', plugins_url('assets/if-menu.js', __FILE__), array('jquery'), '1.0');
 			wp_enqueue_script('select2', plugins_url('assets/select2.min.js', __FILE__), array('jquery'), '4.0.4');
+			wp_enqueue_script('if-menu', plugins_url('assets/if-menu.js', __FILE__), array('select2'), '1.0');
 			wp_enqueue_style('if-menu', plugins_url('assets/if-menu.css', __FILE__), '1.0');
 			wp_enqueue_style('select2', plugins_url('assets/select2.min.css', __FILE__), '4.0.4');
 
@@ -176,7 +176,7 @@ class If_Menu {
 		<div class="wrap about-wrap if-menu-wrap">
 			<h1><?php _e('If Menu', 'if-menu') ?></h1>
 			<p class="about-text">
-				<?php _e('Thanks for using <strong>If Menu</strong>! This plugin allows you to hide or only show menu items with visibility rules, ex: <code>Display menu item if User is logged in</code> or <code>Hide menu item if Using mobile device</code>', 'if-menu') ?>
+				<?php _e('Thanks for using <strong>If Menu</strong>! Now you can choose to hide or display menu items with visibility rules, example: <code>Display menu item if User is logged in</code> or <code>Hide menu item if Using mobile device</code>', 'if-menu') ?>
 				—
 				<a href="<?php echo admin_url('nav-menus.php') ?>" class="button"><?php _e('Manage your menus', 'if-menu') ?></a></p>
 			<hr class="wp-header-end">
@@ -366,6 +366,40 @@ class If_Menu {
 				}
 			}
 		}
+	}
+
+	public static function getIp() {
+		foreach (array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR') as $key) {
+			if (array_key_exists($key, $_SERVER) === true) {
+				foreach (array_map('trim', explode(',', $_SERVER[$key])) as $ip) {
+					if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false) {
+						return $ip;
+					}
+				}
+			}
+		}
+	}
+
+	public static function getUserCountryCode() {
+		if (isset($_SERVER["HTTP_CF_IPCOUNTRY"])) {
+			$countryCode = $_SERVER["HTTP_CF_IPCOUNTRY"];
+		} elseif (false === ($countryCode = get_transient('ip-country-code-' . self::getIp()))) {
+			$request = wp_remote_get('https://apis.blue/ip/' . self::getIp());
+			if (!is_wp_error($request)) {
+				$data = json_decode(wp_remote_retrieve_body($request));
+				if (isset($data->country) && $data->country) {
+					$countryCode = $data->country;
+				} else {
+					$countryCode = 'unknown';
+				}
+				set_transient('ip-country-code-' . self::getIp(), $countryCode, 3600 * 8);
+			} else {
+				// failed request for Geo location API
+				$countryCode = '';
+			}
+		}
+
+		return $countryCode;
 	}
 
 	public static function pluginActivate() {
