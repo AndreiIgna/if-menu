@@ -44,6 +44,8 @@ class If_Menu {
 
 		load_plugin_textdomain('if-menu', false, dirname(plugin_basename(__FILE__)) . '/languages');
 
+		add_action('rest_api_init', 'If_Menu::restApi');
+
 		if (is_admin()) {
 			add_action('admin_enqueue_scripts', 'If_Menu::admin_init');
 			add_action('wp_update_nav_menu_item', 'If_Menu::wp_update_nav_menu_item', 10, 2);
@@ -51,6 +53,7 @@ class If_Menu {
 			add_action('wp_nav_menu_item_custom_fields', 'If_Menu::menu_item_fields');
 			add_action('wp_nav_menu_item_custom_title', 'If_Menu::menu_item_title');
 			add_action('init', 'If_Menu::saveSettings');
+			add_action('admin_footer', 'If_Menu::adminFooter');
 			add_action('admin_menu', function() {
 				add_submenu_page('themes.php', __('If Menu', 'if-menu'), __('If Menu', 'if-menu'), 'edit_theme_options', 'if-menu', 'If_Menu::page');
 			});
@@ -143,13 +146,14 @@ class If_Menu {
 	public static function admin_init() {
 		global $pagenow;
 
-		if ($pagenow == 'nav-menus.php' || $pagenow == 'themes.php') {
+		if ($pagenow == 'nav-menus.php') {
 			wp_enqueue_script('select2', plugins_url('assets/select2.min.js', __FILE__), array('jquery'), '4.0.4');
-			wp_enqueue_script('if-menu', plugins_url('assets/if-menu.js', __FILE__), array('select2'), '1.0');
-			wp_enqueue_style('if-menu', plugins_url('assets/if-menu.css', __FILE__), '1.0');
-			wp_enqueue_style('select2', plugins_url('assets/select2.min.css', __FILE__), '4.0.4');
+			wp_enqueue_script('if-menu', plugins_url('assets/if-menu.js', __FILE__), array('select2', 'jquery-ui-dialog'), '1.0');
+			wp_enqueue_style('select2', plugins_url('assets/select2.min.css', __FILE__), array(), '4.0.4');
+			wp_enqueue_style('if-menu', plugins_url('assets/if-menu.css', __FILE__), array('wp-jquery-ui-dialog'), '1.0');
 
-			wp_localize_script('if-menu-js', 'IfMenu', array(
+			wp_localize_script('if-menu', 'IfMenu', array(
+				'plan'					=>	self::getPlan(),
 				'conflictErrorMessage'  =>  sprintf(
 					wp_kses(
 						__('<strong>If Menu</strong> detected a conflict with another plugin or theme and may not work as expected. <a href="%s" target="_blank">Read more about the issue here</a>', 'if-menu'),
@@ -158,6 +162,10 @@ class If_Menu {
 					esc_url('https://wordpress.org/plugins/if-menu/faq/')
 				)
 			));
+		}
+
+		if ($pagenow == 'themes.php') {
+			wp_enqueue_style('if-menu', plugins_url('assets/if-menu.css', __FILE__), '1.0');
 		}
 	}
 
@@ -169,37 +177,88 @@ class If_Menu {
 		}
 	}
 
+	public static function adminFooter() {
+		?>
+		<div class="if-menu-dialog-premium hidden" title="<?php _e('That\'s a Premium feature', 'if-menu') ?>">
+			<p><?php _e('Get <strong>If Menu Premium</strong> plan to enable integrations with third-party plugins, user location detection and priority support', 'if-menu') ?></p><br>
+			<p>
+				<a href="<?php echo admin_url('themes.php?page=if-menu') ?>" class="button button-primary pull-right if-menu-dialog-btn" data-action="get-premium"><?php _e('Get If Menu Premium', 'if-menu') ?></a>
+				<button class="button close if-menu-dialog-btn" data-action="close"><?php _e('Use free plan', 'if-menu') ?></button>
+			</p>
+		</div>
+		<?php
+	}
+
 	public static function page() {
 		$ifMenuPeek = get_option('if-menu-peak');
+		$plan = self::getPlan();
 		?>
 
 		<div class="wrap about-wrap if-menu-wrap">
 			<h1><?php _e('If Menu', 'if-menu') ?></h1>
 			<p class="about-text">
-				<?php _e('Thanks for using <strong>If Menu</strong>! Now you can choose to hide or display menu items with visibility rules, example: <code>Display menu item if User is logged in</code> or <code>Hide menu item if Using mobile device</code>', 'if-menu') ?>
+				<?php _e('Thanks for using <strong>If Menu</strong>! Now you can choose to hide or display menu items with visibility rules, like: <code>Display menu item if User is logged in</code> or <code>Hide menu item if Using mobile device</code>', 'if-menu') ?>
 				—
 				<a href="<?php echo admin_url('nav-menus.php') ?>" class="button"><?php _e('Manage your menus', 'if-menu') ?></a></p>
 			<hr class="wp-header-end">
 
-			<div class="feature-section two-col">
+			<div class="feature-section pricing-plan-section two-col">
 				<div class="col">
-					<h3><?php _e('Basic set of visibility rules', 'if-menu') ?></h3>
-					<ul>
-						<li><?php _e('User state: User is logged in', 'if-menu') ?></li>
-						<li><?php _e('User roles: Admin, Editor, Author, etc', 'if-menu') ?></li>
-						<li><?php _e('Page type: Front page, Single page, Single post', 'if-menu') ?></li>
-						<li><?php _e('Device Is Mobile', 'if-menu') ?></li>
-						<li><?php _e('Language Is RTL', 'if-menu') ?></li>
-					</ul>
-					<p><?php _e('Theme / plugin developers can extend the plugin by adding custom visibility rules', 'if-menu') ?></p>
+					<div class="pricing-cell <?php if (!$plan || $plan['plan'] == 'free') echo 'selected' ?>">
+						<h3><?php _e('Free', 'if-menu') ?></h3>
+						
+						<ul>
+							<li>
+								<?php _e('Basic visibility rules:', 'if-menu') ?>
+								<ul>
+									<li>User role - is Admin, Editor, Author or Shop Manager</li>
+									<li>User state - visitor is logged in or out</li>
+									<li>Visitor device - detect mobile or desktop</li>
+								</ul>
+							</li>
+							<li><?php _e('Support on WordPress forum', 'if-menu') ?></li>
+						</ul>
+						
+						<p>
+							<?php if (!$plan || $plan['plan'] == 'free') : ?>
+								<button class="button disabled">Current plan</button>
+							<?php else : ?>
+								<button class="button">Downgrade plan</button>
+							<?php endif ?>
+						</p>
+					</div>
 				</div>
+
 				<div class="col">
-					<h3><?php _e('Visibility rule type', 'if-menu') ?></h3>
-					<p><?php _e('Visibity rules can have 2 states:', 'if-menu') ?></p>
-					<ul>
-						<li><strong class="if-menu-green"><?php _e('Show', 'if-menu') ?></strong> - <?php _e('show menu item only if vsibility rule passes', 'if-menu') ?></li>
-						<li><strong class="if-menu-red"><?php _e('Hide', 'if-menu') ?></strong> - <?php _e('hide menu item if rule passes', 'if-menu') ?></li>
-					</ul>
+					<div class="pricing-cell <?php if ($plan && $plan['plan'] == 'premium') echo 'selected' ?>">
+						<span class="price">$15<small>/annually</small></span>
+						<h3><?php _e('Premium', 'if-menu') ?></h3>
+						
+						<ul>
+							<li>
+								<?php _e('Advanced visibility rules:', 'if-menu') ?>
+								<ul>
+									<li>Visitor location - detect visitor country</li>
+								</ul>
+							</li>
+							<li>
+								<?php _e('Integrations with 3rd-party plugins:', 'if-menu') ?>
+								<ul>
+									<li>WooCommerce Membership - Display menu items for visitors with active memberships</li>
+								</ul>
+							</li>
+							<li><?php _e('Priority email support', 'if-menu') ?></li>
+						</ul>
+
+						<p class="description">
+							<?php if ($plan && $plan['plan'] == 'premium') : ?>
+								<button class="button disabled">Current plan</button>
+								<br><br><small class="text-muted">Until <?php echo date(get_option('date_format'), strtotime($plan['until'])) ?></small>
+							<?php else : ?>
+								<a href="https://wordpress.layered.studio/get-premium?site=https://culturadecasa.ro&_nonce=<?php echo self::apiNonce('get-premium') ?>" class="button button-primary">Get premium</a>
+							<?php endif ?>
+						</p>
+					</div>
 				</div>
 			</div>
 
@@ -329,7 +388,7 @@ class If_Menu {
     }
   }
 
-  public static function customWalker() {
+  public static function customWalker($walker) {
     global $wp_version;
 
     if (version_compare( $wp_version, '4.7.0', '>=')) {
@@ -366,6 +425,40 @@ class If_Menu {
 				}
 			}
 		}
+	}
+
+	public static function apiNonce($action) {
+		$nonce = uniqid();
+		set_transient('if-menu-nonce-' . $action, $nonce, 600);
+		return $nonce;
+	}
+
+	public static function getPlan() {
+		if (true || isset($_REQUEST['if-menu-recheck-plan']) || false === ($plan = get_transient('if-menu-plan'))) {
+			$plan = false;
+			$request = wp_remote_get('https://wordpress.layered.studio/get-plan?site=' . urlencode(site_url()) . '&for=if-menu&_nonce=' . self::apiNonce('plan-check'));
+
+			if (!is_wp_error($request)) {
+				$data = json_decode(wp_remote_retrieve_body($request), true);
+				if (isset($data['plans'])) {
+					$plan = $data['plans']['if-menu'];
+					set_transient('if-menu-plan', $plan, 500);
+				}
+			}
+		}
+
+		return $plan;
+	}
+
+	public static function restApi() {
+		register_rest_route('if-menu/v1', '/did-you-made-this-request', array(
+			'methods'	=>	'GET',
+			'callback'	=>	function() {
+				$action = isset($_REQUEST['action']) ? sanitize_key($_REQUEST['action']) : false;
+				$nonce = isset($_REQUEST['nonce']) ? sanitize_key($_REQUEST['nonce']) : false;
+				return ['valid' => $action && $nonce && $nonce === get_transient('if-menu-nonce-' . $action)];
+			}
+		) );
 	}
 
 	public static function getIp() {

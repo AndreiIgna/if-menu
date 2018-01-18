@@ -47,20 +47,39 @@ jQuery(function($) {
 
 		elCondition.find('.menu-item-if-menu-options').select2('destroy').remove();
 
-		if (options) {
-			var data = [];
-
-			for (key in options) {
-				data.push({
-					id:		key,
-					text:	options[key]
-				});
-			}
-
+		if (options && !!IfMenu.plan && IfMenu.plan.plan === 'premium') {
 			$('<select class="menu-item-if-menu-options" name="menu-item-if-menu-options[' + elCondition.data('menu-item-id') + '][' + elCondition.index() + '][]" style="width: 305px" multiple></select>')
 				.appendTo(elCondition)
-				.select2({data: data});
+				.select2({data: $.map(options, function(value, index) {
+					return {
+						id:		index,
+						text:	value
+					};
+				})});
+		} else if (options && (!IfMenu.plan || IfMenu.plan.plan !== 'premium')) {
+			$(this).find(':selected').removeAttr('selected');
+			$(this).find(':first').attr('selected', true);
+			$('.if-menu-dialog-premium').dialog({
+				dialogClass:	'if-menu-dialog',
+				draggable:		false,
+				modal:			true,
+				width:			450,
+				open:			function(event, ui) {
+					console.log(event);
+					console.log(ui);
+				}
+			});
 		}
+	});
+
+
+	// Store current value in data-val attribute (used for CSS styling)
+	$('.if-menu-dialog-btn').click(function() {
+		if ($(this).data('action') === 'get-premium') {
+			window.onbeforeunload = function() {};
+		}
+
+		$(this).closest('.ui-dialog-content').dialog('close');
 	});
 
 
