@@ -49,7 +49,7 @@ class If_Menu {
 		if (is_admin()) {
 			add_action('admin_enqueue_scripts', 'If_Menu::admin_init');
 			add_action('wp_update_nav_menu_item', 'If_Menu::wp_update_nav_menu_item', 10, 2);
-			add_filter('wp_edit_nav_menu_walker', 'If_Menu::customWalker');
+			add_filter('wp_edit_nav_menu_walker', 'If_Menu::customWalker', 500);
 			add_action('wp_nav_menu_item_custom_fields', 'If_Menu::menu_item_fields');
 			add_action('wp_nav_menu_item_custom_title', 'If_Menu::menu_item_title');
 			add_action('init', 'If_Menu::saveSettings');
@@ -156,9 +156,10 @@ class If_Menu {
 				'plan'					=>	self::getPlan(),
 				'conflictErrorMessage'  =>  sprintf(
 					wp_kses(
-						__('<strong>If Menu</strong> detected a conflict with another plugin or theme and may not work as expected. <a href="%s" target="_blank">Read more about the issue here</a>', 'if-menu'),
+						__('<strong>If Menu</strong> detected a conflict with another plugin or theme (%s) and may not work as expected. <a href="%s" target="_blank">Read more about the issue here</a>', 'if-menu'),
 						array('a' => array('href' => array()), 'strong' => array())
 					),
+					apply_filters('wp_edit_nav_menu_walker', 'Walker_Nav_Menu_Edit'),
 					esc_url('https://wordpress.org/plugins/if-menu/faq/')
 				)
 			));

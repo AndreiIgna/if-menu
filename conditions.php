@@ -336,7 +336,7 @@ function if_menu_basic_conditions($conditions) {
 			'ZM' => 'Zambia',
 			'ZW' => 'Zimbabwe'
 		),
-		'condition'	=>	function($item, $selectedOptions = []) {
+		'condition'	=>	function($item, $selectedOptions = array()) {
 			return in_array(If_Menu::getUserCountryCode(), $selectedOptions);
 		},
 		'group'		=>	__('User', 'if-menu')
