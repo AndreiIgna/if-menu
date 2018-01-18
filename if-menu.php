@@ -383,7 +383,7 @@ class If_Menu {
       echo '<span class="is-submenu">';
       printf( __( '%s if %s', 'if-menu' ), $conditionTypes[0], $rules[$conditions[0]]['name'] );
       if ( count( $if_menu_enabled ) > 1 ) {
-        printf( ' ' . _n( 'and 1 more rule', 'and %d more rules', count( $if_menu_enabled ) - 1, 'if-menu' ), count( $if_menu_enabled ) - 1 );
+        printf( ' ' . _n( 'and %d more rule', 'and %d more rules', count( $if_menu_enabled ) - 1, 'if-menu' ), count( $if_menu_enabled ) - 1 );
       }
       echo '</span>';
     }
