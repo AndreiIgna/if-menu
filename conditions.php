@@ -30,6 +30,13 @@ function if_menu_basic_conditions($conditions) {
 
 	if (defined('WP_ALLOW_MULTISITE') && WP_ALLOW_MULTISITE === true) {
 		$conditions[] = array(
+			'id'		=>	'user-is-super-admin',
+			'name'		=>	sprintf(__('User is %s', 'if-menu'), 'Super Admin'),
+			'condition'	=>	'is_super_admin',
+			'group'		=>	__('User', 'if-menu')
+		);
+
+		$conditions[] = array(
 			'id'		=>	'user-logged-in-current-site',
 			'name'		=>	__('User is logged in for current site', 'if-menu'),
 			'condition'	=>	function() {
