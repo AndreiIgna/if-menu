@@ -349,6 +349,23 @@ function if_menu_basic_conditions($conditions) {
 		'group'		=>	__('User', 'if-menu')
 	);
 
+	// Groups Plugin
+	if (in_array('groups/groups.php',array_keys(get_plugins())) && class_exists('Groups_Group')) {
+            $groups = Groups_Group::get_groups();
+            foreach($groups as $group) {
+                $group_id     = $group->group_id;
+                $group_name   = $group->name;
+                $conditions[] = array(
+                    'id'        => 'gorup-is-'.$group_name.'-'.$group_id,
+                    'name'      => __( sprintf('Group is %s' , $group_name), 'if-menu' ),
+                    'condition' => function() use ($group_id) {
+                            $groups_user = new Groups_User( get_current_user_id() );
+                            return $groups_user->is_member($group_id);
+                     },
+                    'group'     => 'Groups'
+                );
+            }
+	}
 
 	return $conditions;
 }
