@@ -505,10 +505,11 @@ class If_Menu {
 
 
 /* ------------------------------------------------
-	Include default conditions for menu items
+	Include default visibility rules for menu items
 ------------------------------------------------ */
 
-include 'conditions.php';
+include 'src/conditions-basic.php';
+include 'src/conditions-multiple-options.php';
 
 
 
