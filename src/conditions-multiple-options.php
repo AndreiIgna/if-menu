@@ -294,7 +294,7 @@ function ifMenuAdvancedConditions($conditions) {
 	}
 
 
-	// Third-party plugin integration - if-menu Subscriptions
+	// Third-party plugin integration - WooCommerce Subscriptions
 	if (in_array('woocommerce-subscriptions/woocommerce-subscriptions.php', $activePlugins)) {
 		$subscriptionsOptions = array();
 
@@ -328,6 +328,35 @@ function ifMenuAdvancedConditions($conditions) {
 				return $hasSubscription;
 			},
 			'options'	=>	$subscriptionsOptions,
+			'group'		=>	__('User', 'if-menu')
+		);
+	}
+
+
+	// Third-party plugin integration - WishList Member
+	if (function_exists('wlmapi_the_levels')) {
+		$membershipLevelOptions = array();
+		$wishlistMembershipLevels = wlmapi_the_levels();
+
+		foreach ($wishlistMembershipLevels['levels']['level'] as $level) {
+			$membershipLevelOptions[$level['id']] = $level['name'];
+		}
+
+		$conditions[] = array(
+			'id'		=>	'wishlist-member',
+			'name'		=>	__('WishList Membership Level', 'if-menu'),
+			'condition'	=>	function($item, $membershipLevels = array()) {
+				$hasAccess = false;
+				$userId = get_current_user_id();
+
+				foreach ($membershipLevels as $level) {
+					if (wlmapi_is_user_a_member($level, $userId)) {
+						$hasAccess = true;
+					}
+				}
+
+				return $hasAccess;
+			},
 			'group'		=>	__('User', 'if-menu')
 		);
 	}
