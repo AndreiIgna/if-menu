@@ -294,5 +294,44 @@ function ifMenuAdvancedConditions($conditions) {
 	}
 
 
+	// Third-party plugin integration - if-menu Subscriptions
+	if (in_array('woocommerce-subscriptions/woocommerce-subscriptions.php', $activePlugins)) {
+		$subscriptionsOptions = array();
+
+		$subscriptions = get_posts(array(
+			'numberposts'	=>	-1,
+			'post_type'		=>	array('product', 'product-variation'),
+			'post_status'	=>	'publish',
+			'tax_query'		=>	array(array(
+				'taxonomy'		=>	'product_type',
+				'field'			=>	'slug',
+				'terms'			=>	array('subscription', 'variable-subscription')
+			))
+		));
+
+		foreach ($subscriptions as $subscription) {
+			$subscriptionsOptions[$subscription->ID] = $subscription->post_title;
+		}
+
+		$conditions[] = array(
+			'id'		=>	'woocommerce-subscriptions',
+			'name'		=>	__('Has active subscription:', 'if-menu'),
+			'condition'	=>	function($item, $selectedSubscriptions = array()) {
+				$hasSubscription = false;
+
+				foreach ($selectedSubscriptions as $subscriptionId) {
+					if (wcs_user_has_subscription(0, $subscriptionId, 'active')) {
+						$hasSubscription = true;
+					}
+				}
+
+				return $hasSubscription;
+			},
+			'options'	=>	$subscriptionsOptions,
+			'group'		=>	__('User', 'if-menu')
+		);
+	}
+
+
 	return $conditions;
 }
