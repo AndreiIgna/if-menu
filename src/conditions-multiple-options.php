@@ -262,7 +262,7 @@ function ifMenuAdvancedConditions($conditions) {
 			'ZW' => __( 'Zimbabwe', 'if-menu' ),
 		),
 		'condition'	=>	function($item, $selectedOptions = array()) {
-			return in_array(If_Menu::getUserCountryCode(), $selectedOptions);
+			return in_array(get_user_country_code(), $selectedOptions);
 		},
 		'group'		=>	__('User', 'if-menu')
 	);

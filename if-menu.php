@@ -462,40 +462,6 @@ class If_Menu {
 		) );
 	}
 
-	public static function getIp() {
-		foreach (array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR') as $key) {
-			if (array_key_exists($key, $_SERVER) === true) {
-				foreach (array_map('trim', explode(',', $_SERVER[$key])) as $ip) {
-					if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false) {
-						return $ip;
-					}
-				}
-			}
-		}
-	}
-
-	public static function getUserCountryCode() {
-		if (isset($_SERVER["HTTP_CF_IPCOUNTRY"])) {
-			$countryCode = $_SERVER["HTTP_CF_IPCOUNTRY"];
-		} elseif (false === ($countryCode = get_transient('ip-country-code-' . self::getIp()))) {
-			$request = wp_remote_get('https://apis.blue/ip/' . self::getIp());
-			if (!is_wp_error($request)) {
-				$data = json_decode(wp_remote_retrieve_body($request));
-				if (isset($data->country) && $data->country) {
-					$countryCode = $data->country;
-				} else {
-					$countryCode = 'unknown';
-				}
-				set_transient('ip-country-code-' . self::getIp(), $countryCode, 3600 * 8);
-			} else {
-				// failed request for Geo location API
-				$countryCode = '';
-			}
-		}
-
-		return $countryCode;
-	}
-
 	public static function pluginActivate() {
 		add_option('if-menu-peak', 0);
 	}
@@ -508,6 +474,7 @@ class If_Menu {
 	Include default visibility rules for menu items
 ------------------------------------------------ */
 
+include 'src/user-info.php';
 include 'src/conditions-basic.php';
 include 'src/conditions-multiple-options.php';
 
