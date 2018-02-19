@@ -1,8 +1,8 @@
 === If Menu ===
 Contributors: andrei.igna
-Tags: menu, if, rules, conditional, statements, hide, show, dispaly, roles, nav menu
+Tags: menu, if, menu, rules, conditional, statements, hide, show, dispaly, roles, nav menu
 Requires at least: 4
-Tested up to: 4.8
+Tested up to: 4.9
 Stable tag: trunk
 License: GPL2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -94,6 +94,18 @@ Got the icons from here https://dribbble.com/shots/1045549-Light-Switches-PSD, s
 2. Example of visibility rules
 
 == Changelog ==
+
+= 0.8 =
+*Release Date - 19 February 2018*
+
+* Added - Visibility rules with multiple options. Requires Premium plan
+* Added - Visibility rule - User country
+* Added - Visibility rule - Is Super Admin on MultiSite
+* Added - Visibility rule - User is in Group, integration with [Groups](https://wordpress.org/plugins/groups/) plugin
+* Added - Visibility rule - User has subscription, integration with [WooCommerce Subscriptions](https://woocommerce.com/products/woocommerce-subscriptions/) plugin
+* Added - Visibility rule - User membership level, integration with [WishList Member](https://member.wishlistproducts.com/) plugin
+* Updated - Better conflict detection for Nav_Menu Walker
+* Fixed - translation strings & function used
 
 = 0.7 =
 *Release Date - 18 September 2017*

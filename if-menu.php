@@ -3,7 +3,7 @@
 Plugin Name: If Menu
 Plugin URI: https://wordpress.org/plugins/if-menu/
 Description: Show/hide menu items with conditional statements
-Version: 0.7.1
+Version: 0.8
 Text Domain: if-menu
 Author: Layered
 Author URI: https://layered.studio
@@ -27,16 +27,6 @@ License: GPL2
 */
 
 
-
-// useful debug helpers
-if (!function_exists('print_pre')) {
-	function print_pre($expression) {
-		printf('<pre>%s</pre>', print_r($expression, true));
-	}
-}
-
-
-
 class If_Menu {
 
 	public static function init() {
@@ -55,7 +45,7 @@ class If_Menu {
 			add_action('init', 'If_Menu::saveSettings');
 			add_action('admin_footer', 'If_Menu::adminFooter');
 			add_action('admin_menu', function() {
-				add_submenu_page('themes.php', __('If Menu', 'if-menu'), __('If Menu', 'if-menu'), 'edit_theme_options', 'if-menu', 'If_Menu::page');
+				add_submenu_page('themes.php', 'If Menu', 'If Menu', 'edit_theme_options', 'if-menu', 'If_Menu::page');
 			});
 
 			if ($pagenow !== 'nav-menus.php') {
@@ -147,11 +137,11 @@ class If_Menu {
 		global $pagenow;
 
 		if ($pagenow == 'nav-menus.php') {
-			wp_enqueue_script('if-menu', plugins_url('assets/if-menu.js', __FILE__), array('select2', 'jquery-ui-dialog'), '1.0');
 			wp_enqueue_script('select2', plugins_url('assets/select2.min.js', __FILE__), array('jquery'), '4.0.5');
+			wp_enqueue_script('if-menu', plugins_url('assets/if-menu.js', __FILE__), array('select2', 'jquery-ui-dialog'), '0.8');
 
-			wp_enqueue_style('if-menu', plugins_url('assets/if-menu.css', __FILE__), array('wp-jquery-ui-dialog'), '1.0');
 			wp_enqueue_style('select2', plugins_url('assets/select2.min.css', __FILE__), array(), '4.0.5');
+			wp_enqueue_style('if-menu', plugins_url('assets/if-menu.css', __FILE__), array('wp-jquery-ui-dialog'), '0.8');
 
 			wp_localize_script('if-menu', 'IfMenu', array(
 				'plan'					=>	self::getPlan(),
@@ -167,7 +157,7 @@ class If_Menu {
 		}
 
 		if ($pagenow == 'themes.php') {
-			wp_enqueue_style('if-menu', plugins_url('assets/if-menu.css', __FILE__), '1.0');
+			wp_enqueue_style('if-menu', plugins_url('assets/if-menu.css', __FILE__), '0.8');
 		}
 	}
 
@@ -197,9 +187,9 @@ class If_Menu {
 		?>
 
 		<div class="wrap about-wrap if-menu-wrap">
-			<h1><?php _e('If Menu', 'if-menu') ?></h1>
+			<h1>If Menu</h1>
 			<p class="about-text"><?php _e('Thanks for using <strong>If Menu</strong>! Now you can display tailored menu items to each visitor, based on visibility rules. Here are a few examples:', 'if-menu') ?></p>
-			<ul>
+			<ul class="list">
 				<li><?php _e('Hide Login or Register links for logged-in users:', 'if-menu') ?> <code><span class="if-menu-red"><?php _e('Hide', 'if-menu') ?></span> <?php _e('if', 'if-menu') ?> <span class="if-menu-purple"><?php _e('User is logged in', 'if-menu') ?></span></code></li>
 				<li><?php _e('Display Logout link for logged-in users:', 'if-menu') ?> <code><span class="if-menu-green"><?php _e('Show', 'if-menu') ?></span> <?php _e('if', 'if-menu') ?> <span class="if-menu-purple"><?php _e('User is logged in', 'if-menu') ?></span></code></li>
 				<li><?php _e('Hide menu item on mobile devices:', 'if-menu') ?> <code><span class="if-menu-red"><?php _e('Hide', 'if-menu') ?></span> <?php _e('if', 'if-menu') ?> <span class="if-menu-purple"><?php _e('Mobile', 'if-menu') ?></span></code></li>
@@ -297,6 +287,7 @@ class If_Menu {
 			<hr>
 
 			<p class="text-right">
+				<strong>If Menu</strong>:
 				<a href="https://wordpress.org/plugins/if-menu/#faq" target="wpplugins"><?php _e('FAQs', 'if-menu') ?></a> &middot;
 				<a href="https://wordpress.org/plugins/if-menu/#reviews" target="wpplugins"><?php _e('Reviews', 'if-menu') ?></a> &middot;
 				<a href="https://wordpress.org/support/plugin/if-menu" target="wpplugins"><?php _e('Support', 'if-menu') ?></a>
@@ -331,7 +322,7 @@ class If_Menu {
 		?>
 
 		<p class="if-menu-enable description description-wide">
-			<a href="<?php echo admin_url('themes.php?page=if-menu') ?>" class="pull-right" title="<?php esc_attr_e('Visibility rule examples', 'if-menu') ?>"><span class="dashicons dashicons-editor-help if-menu-help"></span></a>
+			<a href="<?php echo admin_url('themes.php?page=if-menu') ?>" class="if-menu-help" title="<?php esc_attr_e('Visibility rule examples', 'if-menu') ?>"><span class="dashicons dashicons-editor-help"></span></a>
 			<label>
 				<input <?php if (isset($if_menu_enable[0])) checked( $if_menu_enable[0], 1 ) ?> type="checkbox" value="1" class="menu-item-if-menu-enable" name="menu-item-if-menu-enable[<?php echo esc_attr( $item_id ); ?>][]" />
 				<?php esc_html_e( 'Change menu item visibility', 'if-menu' ) ?>

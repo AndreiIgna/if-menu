@@ -48,6 +48,10 @@
 }
 
 .if-menu-help {
+	float: right;
+}
+
+.if-menu-help span {
 	text-decoration: none;
 	color: #c0c0c0;
 }
@@ -59,6 +63,10 @@
 .if-menu-wrap ul {
 	list-style: circle;
 	padding-left: 20px;
+}
+
+.if-menu-wrap .list li {
+    line-height: 1.4rem;
 }
 
 .if-menu-wrap .about-text {
