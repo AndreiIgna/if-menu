@@ -9,7 +9,7 @@ function ifMenuAdvancedConditions($conditions) {
 	// User location
 	$conditions[] = array(
 		'id'		=>	'user-location',
-		'name'		=>	__('User from country:', 'if-menu'),
+		'name'		=>	__('From country', 'if-menu'),
 		'options'	=>	array(
 			'AF' => __( 'Afghanistan', 'if-menu' ),
 			'AX' => __( '&#197;land Islands', 'if-menu' ),
@@ -277,7 +277,7 @@ function ifMenuAdvancedConditions($conditions) {
 
 		$conditions[] = array(
 			'id'		=>	'user-in-group',
-			'name'		=>	__('User is in group:', 'if-menu'),
+			'name'		=>	__('Is in group', 'if-menu'),
 			'condition'	=>	function($item, $selectedGroups = array()) {
 				$isInGroup = false;
 				$groupsUser = new Groups_User(get_current_user_id());
@@ -315,7 +315,7 @@ function ifMenuAdvancedConditions($conditions) {
 
 		$conditions[] = array(
 			'id'		=>	'woocommerce-subscriptions',
-			'name'		=>	__('Has active subscription:', 'if-menu'),
+			'name'		=>	__('Has active subscription', 'if-menu'),
 			'condition'	=>	function($item, $selectedSubscriptions = array()) {
 				$hasSubscription = false;
 

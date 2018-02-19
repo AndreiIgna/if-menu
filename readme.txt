@@ -7,17 +7,19 @@ Stable tag: trunk
 License: GPL2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Display or hide menu items with user-defines rules
+Display tailored menu items to each visitor with visibility rules
 
 == Description ==
 
-**If Menu** plugin adds extra functionality for menu items, making it easy to hide or display them based on user-defined rules. Example:
+Display tailored menu items to each visitor, based on visibility rules. Here are a few examples:
 
 * Display a menu item only if current `User is logged in`
-* Hide menu items if `visiting from mobile device`
-* Display menu items just for `Admins and Editors`
+* Hide menu items if `Device is mobile`
+* Display menu items for `Admins and Editors`
+* Hide Login or Register links for `Logged in Users`
+* Display menu items for `Users from US and UK`
 
-The plugin is easy to use, each menu item will have a “Change menu item visibility” option which will enable the selection of rules (example in Screenshots).
+The plugin is easy to use, each menu item will have a new option “Change menu item visibility” which will enable the selection of rules (example in Screenshots)
 
 ## Features
 
@@ -25,9 +27,10 @@ The plugin is easy to use, each menu item will have a “Change menu item visibi
   * User state `User is logged in`
   * User roles `Admin` `Editor` `Author` etc
   * Page type `Front page` `Single page` `Single post`
-  * Device `Is Mobile`
-  * Language `Is RTL`
-  * *more to be added with each plugin update*
+  * Visitor device `Is Mobile`
+* Advanced visibility rules - requires Premium plan
+  * Visitor location - detect visitor's Country
+  * 3rd-party plugin integrations - WooCommerce Subscriptions, Groups, WishList Member
 * Multiple rules - mix multiple rules for a menu item visibility
   * show if `User is logged in` AND `Device is mobile`
   * show if `User is Admin` AND `Is front page`
@@ -45,7 +48,7 @@ To install the plugin, follow the steps below
 
 == Frequently Asked Questions ==
 
-= If Menu is broken =
+= If Menu is broken, no visibility rules are available =
 
 The code for modifying the menu items is limited and if other plugins/themes try to alter the menu items, this plugin will break.
 
@@ -77,7 +80,7 @@ function my_new_menu_conditions($conditions) {
 }
 `
 
-= Where do I find conditional functions? =
+= Where can I find conditional functions? =
 
 WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_Tags) which can be used to create custom rules for almost any combination that a theme/plugin developer can think of.
 

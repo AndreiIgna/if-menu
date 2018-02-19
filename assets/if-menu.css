@@ -9,6 +9,10 @@
 	color: #e04c4c;
 }
 
+.if-menu-purple {
+	color: #8b6cfb;
+}
+
 @keyframes ifMenufadeIn {
 	from {
 		opacity: 0;
@@ -43,6 +47,11 @@
 	text-shadow: 0px 0px 30px rgb(0, 0, 0);
 }
 
+.if-menu-help {
+	text-decoration: none;
+	color: #c0c0c0;
+}
+
 
 
 /* IF MENU page */
@@ -54,6 +63,7 @@
 
 .if-menu-wrap .about-text {
 	margin-right: 0;
+	min-height: auto;
 }
 
 .if-menu-wrap .two-col,
@@ -82,6 +92,10 @@
   box-shadow: 0px 2px 4px -2px rgba(0,0,0,0.15);
   transition: 0.2s;
   cursor: default;
+}
+
+.if-menu-wrap .pricing-plan-section .pricing-cell a {
+	text-decoration: none;
 }
 
 .if-menu-wrap .pricing-plan-section .pricing-cell:hover {

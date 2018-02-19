@@ -10,7 +10,7 @@ function if_menu_basic_conditions($conditions) {
 	foreach ($wp_roles->role_names as $roleId => $role) {
 		$conditions[] = array(
 			'id'		=>	'user-is-' . $roleId,
-			'name'		=>	sprintf(__('User is %s', 'if-menu'), $role),
+			'name'		=>	sprintf(__('Is %s', 'if-menu'), $role),
 			'condition'	=>	function() use($roleId) {
 				global $current_user;
 				return is_user_logged_in() && in_array($roleId, $current_user->roles);
@@ -19,26 +19,28 @@ function if_menu_basic_conditions($conditions) {
 		);
 	}
 
+	if (defined('WP_ALLOW_MULTISITE') && WP_ALLOW_MULTISITE === true) {
+		$conditions[] = array(
+			'id'		=>	'user-is-super-admin',
+			'name'		=>	sprintf(__('Is %s', 'if-menu'), 'Super Admin'),
+			'condition'	=>	'is_super_admin',
+			'group'		=>	__('User', 'if-menu')
+		);
+	}
+
 
 	// User state
 	$conditions[] = array(
 		'id'		=>	'user-logged-in',
-		'name'		=>	__('User is logged in', 'if-menu'),
+		'name'		=>	__('Is logged in', 'if-menu'),
 		'condition'	=>	'is_user_logged_in',
 		'group'		=>	__('User', 'if-menu')
 	);
 
 	if (defined('WP_ALLOW_MULTISITE') && WP_ALLOW_MULTISITE === true) {
 		$conditions[] = array(
-			'id'		=>	'user-is-super-admin',
-			'name'		=>	sprintf(__('User is %s', 'if-menu'), 'Super Admin'),
-			'condition'	=>	'is_super_admin',
-			'group'		=>	__('User', 'if-menu')
-		);
-
-		$conditions[] = array(
 			'id'		=>	'user-logged-in-current-site',
-			'name'		=>	__('User is logged in for current site', 'if-menu'),
+			'name'		=>	__('Is logged in for current site', 'if-menu'),
 			'condition'	=>	function() {
 				return current_user_can('read');
 			},
