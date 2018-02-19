@@ -147,11 +147,11 @@ class If_Menu {
 		global $pagenow;
 
 		if ($pagenow == 'nav-menus.php') {
-			wp_enqueue_script('select2', plugins_url('assets/select2.min.js', __FILE__), array('jquery'), '4.0.4');
 			wp_enqueue_script('if-menu', plugins_url('assets/if-menu.js', __FILE__), array('select2', 'jquery-ui-dialog'), '1.0');
+			wp_enqueue_script('select2', plugins_url('assets/select2.min.js', __FILE__), array('jquery'), '4.0.5');
 
-			wp_enqueue_style('select2', plugins_url('assets/select2.min.css', __FILE__), array(), '4.0.4');
 			wp_enqueue_style('if-menu', plugins_url('assets/if-menu.css', __FILE__), array('wp-jquery-ui-dialog'), '1.0');
+			wp_enqueue_style('select2', plugins_url('assets/select2.min.css', __FILE__), array(), '4.0.5');
 
 			wp_localize_script('if-menu', 'IfMenu', array(
 				'plan'					=>	self::getPlan(),
