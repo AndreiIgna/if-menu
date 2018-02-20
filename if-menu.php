@@ -3,7 +3,7 @@
 Plugin Name: If Menu
 Plugin URI: https://wordpress.org/plugins/if-menu/
 Description: Display tailored menu items to each visitor with visibility rules
-Version: 0.8.1
+Version: 0.8.2
 Text Domain: if-menu
 Author: Layered
 Author URI: https://layered.studio
@@ -65,6 +65,9 @@ class If_Menu {
 			foreach ($conditions as $condition) {
 				$c2[$condition['id']] = $condition;
 				$c2[$condition['name']] = $condition;
+				if (isset($condition['alias'])) {
+					$c2[$condition['alias']] = $condition;
+				}
 			}
 			$conditions = $c2;
 		}

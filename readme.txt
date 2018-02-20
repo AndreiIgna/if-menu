@@ -95,6 +95,11 @@ Got the icons from here https://dribbble.com/shots/1045549-Light-Switches-PSD, s
 
 == Changelog ==
 
+= 0.8.2 =
+*Release Date - 20 February 2018*
+
+* Fixed - Support for older visibilty rule names, fixes PHP warning
+
 = 0.8.1 =
 *Release Date - 20 February 2018*
 

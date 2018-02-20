@@ -11,6 +11,7 @@ function if_menu_basic_conditions($conditions) {
 		$conditions[] = array(
 			'id'		=>	'user-is-' . $roleId,
 			'name'		=>	sprintf(__('Is %s', 'if-menu'), $role),
+			'alias'		=>	sprintf(__('User is %s', 'if-menu'), $role),
 			'condition'	=>	function() use($roleId) {
 				global $current_user;
 				return is_user_logged_in() && in_array($roleId, $current_user->roles);
@@ -33,6 +34,7 @@ function if_menu_basic_conditions($conditions) {
 	$conditions[] = array(
 		'id'		=>	'user-logged-in',
 		'name'		=>	__('Is logged in', 'if-menu'),
+		'alias'		=>	__('User is logged in', 'if-menu'),
 		'condition'	=>	'is_user_logged_in',
 		'group'		=>	__('User', 'if-menu')
 	);
