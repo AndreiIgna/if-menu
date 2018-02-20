@@ -2,8 +2,8 @@
 /*
 Plugin Name: If Menu
 Plugin URI: https://wordpress.org/plugins/if-menu/
-Description: Show/hide menu items with conditional statements
-Version: 0.8
+Description: Display tailored menu items to each visitor with visibility rules
+Version: 0.8.1
 Text Domain: if-menu
 Author: Layered
 Author URI: https://layered.studio
@@ -109,7 +109,7 @@ class If_Menu {
 
 						$params = array($item);
 
-						if ($ifMenuOptions[$index]) {
+						if ($ifMenuOptions && isset($ifMenuOptions[$index])) {
 							$params[] = $ifMenuOptions[$index];
 						}
 
