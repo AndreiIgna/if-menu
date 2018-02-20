@@ -96,7 +96,7 @@ function if_menu_user_country_code_blueapis($countryCode = '') {
 		$ip = get_user_ip();
 
 		if (false === ($countryCode = get_transient('ip-country-code-' . sanitize_key($ip)))) {
-			$request = wp_remote_get('https://apis.blue/ip/' . $ip);
+			$request = wp_remote_get('https://apis.blue/ip/' . $ip . '?key=layered-if-menu');
 			$data = json_decode(wp_remote_retrieve_body($request) ?: '[]');
 			if (isset($data->country) && $data->country) {
 				$countryCode = $data->country;
