@@ -3,7 +3,7 @@
 Plugin Name: If Menu
 Plugin URI: https://wordpress.org/plugins/if-menu/
 Description: Display tailored menu items to each visitor with visibility rules
-Version: 0.8.2
+Version: 0.8.3
 Text Domain: if-menu
 Author: Layered
 Author URI: https://layered.studio
@@ -469,7 +469,7 @@ class If_Menu {
 			'callback'	=>	function() {
 				$action = isset($_REQUEST['action']) ? sanitize_key($_REQUEST['action']) : false;
 				$nonce = isset($_REQUEST['nonce']) ? sanitize_key($_REQUEST['nonce']) : false;
-				return ['valid' => $action && $nonce && $nonce === get_transient('if-menu-nonce-' . $action)];
+				return array('valid' => $action && $nonce && $nonce === get_transient('if-menu-nonce-' . $action));
 			}
 		) );
 	}
