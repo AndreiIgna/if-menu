@@ -405,11 +405,11 @@ class If_Menu {
     global $wp_version;
 
     if (version_compare( $wp_version, '4.7.0', '>=')) {
-      require_once(plugin_dir_path(__FILE__) . 'if-menu-nav-menu-4.7.php');
+      require_once(plugin_dir_path(__FILE__) . 'src/if-menu-nav-menu-4.7.php');
     } elseif ( version_compare( $wp_version, '4.5.0', '>=' ) ){
-      require_once(plugin_dir_path(__FILE__) . 'if-menu-nav-menu-4.5.php');
+      require_once(plugin_dir_path(__FILE__) . 'src/if-menu-nav-menu-4.5.php');
     } else {
-      require_once(plugin_dir_path(__FILE__) . 'if-menu-nav-menu.php');
+      require_once(plugin_dir_path(__FILE__) . 'src/if-menu-nav-menu.php');
     }
 
     return 'If_Menu_Walker_Nav_Menu_Edit';
