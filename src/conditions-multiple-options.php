@@ -362,5 +362,39 @@ function ifMenuAdvancedConditions($conditions) {
 	}
 
 
+	// Third-party plugin integration - WooCommerce Memberships
+	if (in_array('woocommerce-memberships/woocommerce-memberships.php', $activePlugins)) {
+		$membershipsOptions = array();
+		$plans = wc_memberships_get_membership_plans();
+
+		foreach ($plans as $plan) {
+			$membershipsOptions[$plan->ID] = $plan->name;
+		}
+
+		$conditions[] = array(
+			'id'		=>	'woocommerce-memberships',
+			'name'		=>	__('Has active membership plan', 'if-menu'),
+			'condition'	=>	function($item, $selectedPlans = array()) {
+				$hasPlan = false;
+				$userId = get_current_user_id();
+
+				if (!$userId) {
+					return false;
+				}
+
+				foreach ($selectedPlans as $planId) {
+					if (wc_memberships_is_user_active_member($userId, $planId)) {
+						$hasPlan = true;
+					}
+				}
+
+				return $hasPlan;
+			},
+			'options'	=>	$membershipsOptions,
+			'group'		=>	__('User', 'if-menu')
+		);
+	}
+
+
 	return $conditions;
 }

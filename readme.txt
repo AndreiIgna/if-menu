@@ -18,6 +18,7 @@ Display tailored menu items to each visitor, based on visibility rules. Here are
 * Display menu items for `Admins and Editors`
 * Hide Login or Register links for `Logged in Users`
 * Display menu items for `Users from US and UK`
+* Display menu items only for `Customers with active membership`
 
 The plugin is easy to use, each menu item will have a new option “Change menu item visibility” which will enable the selection of rules (example in Screenshots)
 
@@ -30,7 +31,10 @@ The plugin is easy to use, each menu item will have a new option “Change menu 
   * Visitor device `Is Mobile`
 * Advanced visibility rules - requires Premium plan
   * Visitor location - detect visitor's Country
-  * 3rd-party plugin integrations - WooCommerce Subscriptions, Groups, WishList Member
+  * WooCommerce Subscriptions - Display menus for users with active subscription
+  * WooCommerce Memberships - Display menus for customers with active membership plans
+  * Groups - Detect if users are in specific groups
+  * WishList Member - Detect the users' membership level
 * Multiple rules - mix multiple rules for a menu item visibility
   * show if `User is logged in` AND `Device is mobile`
   * show if `User is Admin` AND `Is front page`
@@ -95,6 +99,9 @@ Got the icons from here https://dribbble.com/shots/1045549-Light-Switches-PSD, s
 
 == Changelog ==
 
+= 0.9 - 2018-03-XX =
+* Added - Visibility rule - Customer has active membership, integration with [WooCommerce Memberships](https://woocommerce.com/products/woocommerce-memberships/) plugin
+
 = 0.8.3 =
 *Release Date - 22 February 2018*
 
@@ -118,6 +125,7 @@ Got the icons from here https://dribbble.com/shots/1045549-Light-Switches-PSD, s
 * Added - Visibility rule - Is Super Admin on MultiSite
 * Added - Visibility rule - User is in Group, integration with [Groups](https://wordpress.org/plugins/groups/) plugin
 * Added - Visibility rule - User has subscription, integration with [WooCommerce Subscriptions](https://woocommerce.com/products/woocommerce-subscriptions/) plugin
+* Added - Visibility rule - User has active membership plan, integration with [WooCommerce Memberships](https://woocommerce.com/products/woocommerce-memberships/) plugin
 * Added - Visibility rule - User membership level, integration with [WishList Member](https://member.wishlistproducts.com/) plugin
 * Updated - Better conflict detection for Nav_Menu Walker
 * Fixed - translation strings & function used
