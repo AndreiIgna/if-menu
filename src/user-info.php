@@ -38,11 +38,8 @@ if (!function_exists('get_user_country_code')) {
 }
 
 add_filter('user_country_code', 'if_menu_user_country_code_woocommerce');
-add_filter('user_country_code', 'if_menu_user_country_code_cloudflare');
-add_filter('user_country_code', 'if_menu_user_country_code_appengine');
-add_filter('user_country_code', 'if_menu_user_country_code_cloudfront');
-add_filter('user_country_code', 'if_menu_user_country_code_geoip');
-add_filter('user_country_code', 'if_menu_user_country_code_blueapis');
+add_filter('user_country_code', 'if_menu_user_country_code_headers');
+add_filter('user_country_code', 'if_menu_user_country_code_metaapis');
 
 function if_menu_user_country_code_woocommerce($countryCode = '') {
 	if (!$countryCode && class_exists('WC_Geolocation')) {
@@ -55,48 +52,24 @@ function if_menu_user_country_code_woocommerce($countryCode = '') {
 	return $countryCode;
 }
 
-function if_menu_user_country_code_cloudflare($countryCode = '') {
-	if (!$countryCode && isset($_SERVER['HTTP_CF_IPCOUNTRY']) && $_SERVER['HTTP_CF_IPCOUNTRY'] && $_SERVER['HTTP_CF_IPCOUNTRY'] !== 'XX') {
-		$countryCode = $_SERVER['HTTP_CF_IPCOUNTRY'];
+function if_menu_user_country_code_headers($countryCode = '') {
+	if (empty($countryCode)) {
+		foreach (array('HTTP_CF_IPCOUNTRY', 'X-AppEngine-country', 'CloudFront-Viewer-Country', 'GEOIP_COUNTRY_CODE', 'HTTP_X_COUNTRY_CODE') as $key) {
+			if (isset($_SERVER[$key]) && $_SERVER[$key] && !in_array($_SERVER[$key], array('XX', 'ZZ', 'A1', 'A2', 'EU', 'AP'))) {
+				return $_SERVER[$key];
+			}
+		}
 	}
 
 	return $countryCode;
 }
 
-function if_menu_user_country_code_appengine($countryCode = '') {
-	if (!$countryCode && isset($_SERVER['X-AppEngine-country']) && $_SERVER['X-AppEngine-country'] && $_SERVER['X-AppEngine-country'] !== 'ZZ') {
-		$countryCode = $_SERVER['X-AppEngine-country'];
-	}
-
-	return $countryCode;
-}
-
-function if_menu_user_country_code_cloudfront($countryCode = '') {
-	if (!$countryCode && isset($_SERVER['CloudFront-Viewer-Country']) && $_SERVER['CloudFront-Viewer-Country']) {
-		$countryCode = $_SERVER['CloudFront-Viewer-Country'];
-	}
-
-	return $countryCode;
-}
-
-function if_menu_user_country_code_geoip($countryCode = '') {
-	if (!$countryCode && isset($_SERVER['GEOIP_COUNTRY_CODE']) && $_SERVER['GEOIP_COUNTRY_CODE'] && !in_array($_SERVER['GEOIP_COUNTRY_CODE'], array('A1', 'A2', 'EU', 'AP'))) {
-		$countryCode = $_SERVER['GEOIP_COUNTRY_CODE'];
-	}
-
-	if (!$countryCode && isset($_SERVER['HTTP_X_COUNTRY_CODE']) && $_SERVER['HTTP_X_COUNTRY_CODE']) {
-		$countryCode = $_SERVER['HTTP_X_COUNTRY_CODE'];
-	}
-
-	return $countryCode;
-}
-
-function if_menu_user_country_code_blueapis($countryCode = '') {
+function if_menu_user_country_code_metaapis($countryCode = '') {
 	if (!$countryCode) {
 		$ip = get_user_ip();
 
 		if (false === ($countryCode = get_transient('ip-country-code-' . sanitize_key($ip)))) {
-			$request = wp_remote_get('https://apis.blue/ip/' . $ip . '?key=layered-if-menu');
+			$request = wp_remote_get('https://apis.blue/ip/' . $ip . '?key=METAce6b9c6c28e4f536b49b9dbaAPIS');
 			$data = json_decode(wp_remote_retrieve_body($request) ?: '[]');
 			if (isset($data->country) && $data->country) {
 				$countryCode = $data->country;
