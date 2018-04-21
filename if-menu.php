@@ -45,7 +45,7 @@ class If_Menu {
 			add_action('wp_nav_menu_item_custom_title', 'If_Menu::menu_item_title');
 			add_action('admin_footer', 'If_Menu::adminFooter');
 
-			if ($pagenow !== 'nav-menus.php') {
+			if (get_option('if-menu-admin', 1) && $pagenow !== 'nav-menus.php') {
 				add_filter( 'wp_get_nav_menu_items', 'If_Menu::wp_get_nav_menu_items' );
 			}
 		} else {
