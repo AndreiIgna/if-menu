@@ -26,6 +26,7 @@ License: GPL2
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+include 'vendor/autoload.php';
 
 class If_Menu {
 
@@ -42,11 +43,7 @@ class If_Menu {
 			add_filter('wp_edit_nav_menu_walker', 'If_Menu::customWalker', 500);
 			add_action('wp_nav_menu_item_custom_fields', 'If_Menu::menu_item_fields');
 			add_action('wp_nav_menu_item_custom_title', 'If_Menu::menu_item_title');
-			add_action('init', 'If_Menu::saveSettings');
 			add_action('admin_footer', 'If_Menu::adminFooter');
-			add_action('admin_menu', function() {
-				add_submenu_page('themes.php', 'If Menu', 'If Menu', 'edit_theme_options', 'if-menu', 'If_Menu::page');
-			});
 
 			if ($pagenow !== 'nav-menus.php') {
 				add_filter( 'wp_get_nav_menu_items', 'If_Menu::wp_get_nav_menu_items' );
@@ -158,18 +155,6 @@ class If_Menu {
 				)
 			));
 		}
-
-		if ($pagenow == 'themes.php') {
-			wp_enqueue_style('if-menu', plugins_url('assets/if-menu.css', __FILE__), '0.8');
-		}
-	}
-
-	public static function saveSettings() {
-		global $pagenow;
-
-		if ($pagenow == 'themes.php' && isset($_POST['if-menu-settings'])) {
-			update_option('if-menu-peak', $_POST['if-menu-peek']);
-		}
 	}
 
 	public static function adminFooter() {
@@ -181,124 +166,6 @@ class If_Menu {
 				<button class="button close if-menu-dialog-btn" data-action="close"><?php _e('Use Basic plan', 'if-menu') ?></button>
 			</p>
 		</div>
-		<?php
-	}
-
-	public static function page() {
-		$ifMenuPeek = get_option('if-menu-peak');
-		$plan = self::getPlan();
-		?>
-
-		<div class="wrap about-wrap if-menu-wrap">
-			<h1>If Menu</h1>
-			<p class="about-text"><?php _e('Thanks for using <strong>If Menu</strong>! Now you can display tailored menu items to each visitor, based on visibility rules. Here are a few examples:', 'if-menu') ?></p>
-			<ul class="list">
-				<li><?php _e('Hide Login or Register links for logged-in users:', 'if-menu') ?> <code><span class="if-menu-red"><?php _e('Hide', 'if-menu') ?></span> <?php _e('if', 'if-menu') ?> <span class="if-menu-purple"><?php _e('User is logged in', 'if-menu') ?></span></code></li>
-				<li><?php _e('Display Logout link for logged-in users:', 'if-menu') ?> <code><span class="if-menu-green"><?php _e('Show', 'if-menu') ?></span> <?php _e('if', 'if-menu') ?> <span class="if-menu-purple"><?php _e('User is logged in', 'if-menu') ?></span></code></li>
-				<li><?php _e('Hide menu item on mobile devices:', 'if-menu') ?> <code><span class="if-menu-red"><?php _e('Hide', 'if-menu') ?></span> <?php _e('if', 'if-menu') ?> <span class="if-menu-purple"><?php _e('Mobile', 'if-menu') ?></span></code></li>
-				<li><?php _e('Display menu item for users in US and UK:', 'if-menu') ?> <code><span class="if-menu-green"><?php _e('Show', 'if-menu') ?></span> <?php _e('if', 'if-menu') ?> <span class="if-menu-purple"><?php _e('User from country: US, UK', 'if-menu') ?></span></code></li>
-			</ul>
-			<hr class="wp-header-end">
-
-			<div class="feature-section pricing-plan-section two-col">
-				<div class="col">
-					<div class="pricing-cell <?php if (!$plan || $plan['plan'] == 'free') echo 'selected' ?>">
-						<span class="price"><small><?php _e('Free', 'if-menu') ?></small></span>
-						<h3><?php _e('Basic', 'if-menu') ?></h3>
-						
-						<ul>
-							<li>
-								<?php _e('Basic visibility rules:', 'if-menu') ?>
-								<ul>
-									<li><?php _e('User role - is Admin, Editor, Author or Shop Manager', 'if-menu') ?></li>
-									<li><?php _e('User state - visitor is logged in or out', 'if-menu') ?></li>
-									<li><?php _e('Visitor device - detect mobile or desktop', 'if-menu') ?></li>
-								</ul>
-							</li>
-							<li><?php _e('Support on WordPress forum', 'if-menu') ?></li>
-						</ul>
-						
-						<p>
-							<?php if (!$plan || $plan['plan'] == 'free') : ?>
-								<button class="button disabled"><?php _e('Current plan', 'if-menu') ?></button>
-							<?php endif ?>
-						</p>
-					</div>
-				</div>
-
-				<div class="col">
-					<div class="pricing-cell <?php if ($plan && $plan['plan'] == 'premium') echo 'selected' ?>">
-						<span class="price">$15<small>/<?php _e('annually', 'if-menu') ?></small></span>
-						<h3><?php _e('Premium', 'if-menu') ?></h3>
-						
-						<ul>
-							<li>
-								<?php _e('Advanced visibility rules:', 'if-menu') ?>
-								<ul>
-									<li><?php _e('Visitor location - detect visitor\'s country', 'if-menu') ?></li>
-								</ul>
-							</li>
-							<li>
-								<?php _e('3rd-party plugin integrations:', 'if-menu') ?>
-								<ul>
-									<li><a href="https://woocommerce.com/products/woocommerce-subscriptions" target="_blank">WooCommerce Subscriptions</a> - <?php _e('Customer has active subscription', 'if-menu') ?></li>
-									<li><a href="https://woocommerce.com/products/woocommerce-memberships" target="_blank">WooCommerce Memberships</a> - <?php _e('Customer has active membership plan', 'if-menu') ?></li>
-									<li><a href="https://wordpress.org/plugins/groups" target="_blank">Groups</a> - <?php _e('Users are in a Group', 'if-menu') ?></li>
-									<li><a href="https://member.wishlistproducts.com" target="_blank">WishList Member</a> - <?php _e('Users above a Membership Level', 'if-menu') ?></li>
-								</ul>
-							</li>
-							<li><?php _e('Priority support', 'if-menu') ?></li>
-						</ul>
-
-						<p class="description">
-							<?php if ($plan && $plan['plan'] == 'premium') : ?>
-								<button class="button disabled"><?php _e('Current plan', 'if-menu') ?></button>
-								<br><br><small class="text-muted"><?php printf(__('Active until %s', 'if-menu'), date(get_option('date_format'), strtotime($plan['until']))) ?></small>
-							<?php else : ?>
-								<a href="https://wordpress.layered.studio/get-premium?site=<?php echo urlencode(site_url()) ?>&_nonce=<?php echo self::apiNonce('get-premium') ?>" class="button button-primary"><?php _e('Get premium', 'if-menu') ?></a>
-							<?php endif ?>
-						</p>
-					</div>
-				</div>
-			</div>
-
-			<hr>
-
-			<h3 class="title"><?php _e('Settings', 'if-menu') ?></h3>
-
-			<form method="post" action="">
-				<table class="form-table">
-					<tbody>
-						<tr>
-							<th scope="row"><?php _e('If Menu peek', 'if-menu') ?></th>
-							<td>
-								<fieldset>
-									<label><input type="checkbox" name="if-menu-peek" value="1" <?php checked($ifMenuPeek, 1) ?>> <?php _e('Enable If Menu peek', 'if-menu') ?></label><br>
-								</fieldset>
-								<p class="description"><?php _e('Let administrators preview hidden menu items on website (useful for testing)', 'if-menu') ?></p>
-							</td>
-						</tr>
-						<tr>
-							<th scope="row"></th>
-							<td>
-								<p class="submit"><input type="submit" name="if-menu-settings" id="submit" class="button button-primary" value="<?php _e('Save Changes', 'if-menu') ?>"></p>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</form>
-
-			<hr>
-
-			<p class="text-right">
-				<strong>If Menu</strong>:
-				<a href="https://wordpress.org/plugins/if-menu/#faq" target="wpplugins"><?php _e('FAQs', 'if-menu') ?></a> &middot;
-				<a href="https://wordpress.org/plugins/if-menu/#reviews" target="wpplugins"><?php _e('Reviews', 'if-menu') ?></a> &middot;
-				<a href="https://wordpress.org/support/plugin/if-menu" target="wpplugins"><?php _e('Support', 'if-menu') ?></a>
-			</p>
-
-		</div>
-
 		<?php
 	}
 
@@ -499,3 +366,4 @@ include 'src/conditions-multiple-options.php';
 
 register_activation_hook(__FILE__, array('If_Menu', 'pluginActivate'));
 add_action('plugins_loaded', 'If_Menu::init');
+add_action('plugins_loaded', '\Layered\IfMenu\Admin::start');
