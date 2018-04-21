@@ -2,7 +2,7 @@
 
 add_filter('if_menu_conditions', 'if_menu_basic_conditions');
 
-function if_menu_basic_conditions($conditions) {
+function if_menu_basic_conditions(array $conditions) {
 	global $wp_roles;
 
 

@@ -3,27 +3,12 @@
 Plugin Name: If Menu
 Plugin URI: https://wordpress.org/plugins/if-menu/
 Description: Display tailored menu items to each visitor with visibility rules
-Version: 0.8.3
+Version: 0.9
 Text Domain: if-menu
 Author: Layered
 Author URI: https://layered.studio
-License: GPL2
-*/
-
-/*  Copyright 2012 Andrei Igna (email: andrei@rokm.ro)
-
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License, version 2, as
-    published by the Free Software Foundation.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+License: GPLv3
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 */
 
 include 'vendor/autoload.php';
@@ -32,8 +17,6 @@ class If_Menu {
 
 	public static function init() {
 		global $pagenow;
-
-		load_plugin_textdomain('if-menu', false, dirname(plugin_basename(__FILE__)) . '/languages');
 
 		add_action('rest_api_init', 'If_Menu::restApi');
 
@@ -138,10 +121,10 @@ class If_Menu {
 
 		if ($pagenow == 'nav-menus.php') {
 			wp_enqueue_script('select2', plugins_url('assets/select2.min.js', __FILE__), array('jquery'), '4.0.5');
-			wp_enqueue_script('if-menu', plugins_url('assets/if-menu.js', __FILE__), array('select2', 'jquery-ui-dialog'), '0.8');
+			wp_enqueue_script('if-menu', plugins_url('assets/if-menu.js', __FILE__), array('select2', 'jquery-ui-dialog'), '0.9');
 
 			wp_enqueue_style('select2', plugins_url('assets/select2.min.css', __FILE__), array(), '4.0.5');
-			wp_enqueue_style('if-menu', plugins_url('assets/if-menu.css', __FILE__), array('wp-jquery-ui-dialog'), '0.8');
+			wp_enqueue_style('if-menu', plugins_url('assets/if-menu.css', __FILE__), array('wp-jquery-ui-dialog'), '0.9');
 
 			wp_localize_script('if-menu', 'IfMenu', array(
 				'plan'					=>	self::getPlan(),
@@ -193,10 +176,10 @@ class If_Menu {
 		?>
 
 		<p class="if-menu-enable description description-wide">
-			<a href="<?php echo admin_url('themes.php?page=if-menu') ?>" class="if-menu-help" title="<?php esc_attr_e('Visibility rule examples', 'if-menu') ?>"><span class="dashicons dashicons-editor-help"></span></a>
+			<a href="<?php echo admin_url('themes.php?page=if-menu') ?>" class="if-menu-help" data-tooltip="<?php esc_attr_e('Visibility rule examples', 'if-menu') ?>" title="<?php esc_attr_e('Visibility rule examples', 'if-menu') ?>"><span class="dashicons dashicons-editor-help"></span></a>
 			<label>
 				<input <?php if (isset($if_menu_enable[0])) checked( $if_menu_enable[0], 1 ) ?> type="checkbox" value="1" class="menu-item-if-menu-enable" name="menu-item-if-menu-enable[<?php echo esc_attr( $item_id ); ?>][]" />
-				<?php esc_html_e( 'Change menu item visibility', 'if-menu' ) ?>
+				<?php esc_html_e('Enable visibility rules', 'if-menu') ?>
 			</label>
 		</p>
 
@@ -315,7 +298,7 @@ class If_Menu {
 	}
 
 	public static function getPlan() {
-		if (true || isset($_REQUEST['if-menu-recheck-plan']) || false === ($plan = get_transient('if-menu-plan'))) {
+		if (isset($_REQUEST['if-menu-recheck-plan']) || false === ($plan = get_transient('if-menu-plan'))) {
 			$plan = false;
 			$request = wp_remote_get('https://wordpress.layered.studio/get-plan?site=' . urlencode(site_url()) . '&for=if-menu&_nonce=' . self::apiNonce('plan-check'));
 
@@ -342,10 +325,6 @@ class If_Menu {
 		) );
 	}
 
-	public static function pluginActivate() {
-		add_option('if-menu-peak', 0);
-	}
-
 }
 
 
@@ -364,6 +343,15 @@ include 'src/conditions-multiple-options.php';
 	Run the plugin
 ------------------------------------------------ */
 
-register_activation_hook(__FILE__, array('If_Menu', 'pluginActivate'));
+if (version_compare(PHP_VERSION, '5.4', '<')) {
+	add_action('admin_notices', function() {
+		?>
+		<div class="notice notice-warning is-dismissible">
+			<p><?php printf(__('<strong>If Menu</strong> plugin requires PHP version to be at least 5.4, current one is %s', 'if-menu'), PHP_VERSION) ?></p>
+		</div>
+		<?php
+	});
+}
+
 add_action('plugins_loaded', 'If_Menu::init');
 add_action('plugins_loaded', '\Layered\IfMenu\Admin::start');

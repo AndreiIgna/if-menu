@@ -9,6 +9,8 @@ If Menu
 
 The plugin is easy to use, each menu item will have a “Change menu item visibility” option which will enable the selection of rules.
 
+> This repo is used only for development, downloading & installing from here won't work as expected. Install from [WordPress.org plugin page](https://wordpress.org/plugins/if-menu/)
+
 
 ## Features
 

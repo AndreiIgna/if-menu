@@ -2,7 +2,7 @@
 
 add_filter('if_menu_conditions', 'ifMenuAdvancedConditions');
 
-function ifMenuAdvancedConditions($conditions) {
+function ifMenuAdvancedConditions(array $conditions) {
 	$activePlugins = apply_filters('active_plugins', get_option('active_plugins'));
 
 

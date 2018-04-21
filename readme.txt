@@ -1,17 +1,18 @@
 === If Menu ===
 Contributors: andrei.igna
-Tags: menu, if, menu, rules, conditional, statements, hide, show, dispaly, roles, nav menu
+Tags: menu, visibility, rules, roles, hide, if, nav menu, show, display
 Requires at least: 4
 Tested up to: 4.9
+Requires PHP: 5.4
 Stable tag: trunk
-License: GPL2
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License: GPLv3
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 Display tailored menu items to each visitor with visibility rules
 
 == Description ==
 
-Display tailored menu items to each visitor, based on visibility rules. Here are a few examples:
+Control what menu items your site's visitors see, based on visibility rules. Here are a few examples:
 
 * Display a menu item only if current `User is logged in`
 * Hide menu items if `Device is mobile`
@@ -42,14 +43,6 @@ The plugin is easy to use, each menu item will have a new option “Change menu 
 
 Example of adding a new visibility rule is described in the FAQ section
 
-== Installation ==
-
-To install the plugin, follow the steps below
-
-1. Upload `if-menu` to the `/wp-content/plugins/` directory
-2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Enable visibility rules for your Menu Items in Appearance -> Menus page
-
 == Frequently Asked Questions ==
 
 = If Menu is broken, no visibility rules are available =
@@ -59,7 +52,6 @@ The code for modifying the menu items is limited and if other plugins/themes try
 This is an ongoing [issue with WordPress](http://core.trac.wordpress.org/ticket/18584) which hopefully will be fixed in a future release.
 
 Try to use just one plugin that changes functionality for menu items.
-
 
 = How can I add a custom visibility rule for menu items? =
 
@@ -88,10 +80,6 @@ function my_new_menu_conditions($conditions) {
 
 WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_Tags) which can be used to create custom rules for almost any combination that a theme/plugin developer can think of.
 
-= Who made that really cool icon =
-
-Got the icons from here https://dribbble.com/shots/1045549-Light-Switches-PSD, so giving the credit to Louie Mantia
-
 == Screenshots ==
 
 1. Enable visibility rules for Menu Items
@@ -99,10 +87,12 @@ Got the icons from here https://dribbble.com/shots/1045549-Light-Switches-PSD, s
 
 == Changelog ==
 
-= 0.9 - 2018-03-XX =
+= 0.9 - 21 April 2018 =
+*This version requires PHP version to be at least 5.4*
 * Added - Visibility rule - Customer has active membership, integration with [WooCommerce Memberships](https://woocommerce.com/products/woocommerce-memberships/) plugin
 * Added - Visibility rule - Customer has active Job Manager Listing Subscription, integration with [Listing Payments for WP Job Manager](https://astoundify.com/products/wp-job-manager-listing-payments/) plugin
 * Added - Option to disable menu item filtering in Admin panel
+* Updated - Texts and notices
 
 = 0.8.3 =
 *Release Date - 22 February 2018*
@@ -210,3 +200,8 @@ Update for compatibility with newer versions of WordPress
 
 = 0.1 =
 * Plugin release. Included basic menu conditional statements
+
+== Upgrade Notice ==
+
+= 0.9 =
+Starting with If Menu v0.9, PHP version is required to be at least 5.4. Make sure the PHP version on your site is higher than this before upgrading

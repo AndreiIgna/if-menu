@@ -24,7 +24,7 @@ class Admin {
 		global $pagenow;
 
 		if ($pagenow == 'themes.php') {
-			wp_enqueue_style('if-menu', plugins_url('assets/if-menu.css', dirname(__FILE__)), '0.8');
+			wp_enqueue_style('if-menu', plugins_url('assets/if-menu.css', dirname(__FILE__)), '0.9');
 		}
 	}
 
@@ -79,7 +79,7 @@ class Admin {
 					<div class="pricing-cell <?php if ($plan && $plan['plan'] == 'premium') echo 'selected' ?>">
 						<span class="price">$15<small>/<?php _e('annually', 'if-menu') ?></small></span>
 						<h3><?php _e('Premium', 'if-menu') ?></h3>
-						
+
 						<ul>
 							<li>
 								<?php _e('Advanced visibility rules:', 'if-menu') ?>
