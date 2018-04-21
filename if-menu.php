@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: If Menu
+Plugin Name: If Menu - Visibility control for menu items
 Plugin URI: https://wordpress.org/plugins/if-menu/
 Description: Display tailored menu items to each visitor with visibility rules
 Version: 0.9

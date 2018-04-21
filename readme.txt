@@ -1,4 +1,4 @@
-=== If Menu ===
+=== If Menu - Visibility control for Menu Items ===
 Contributors: andrei.igna
 Tags: menu, visibility, rules, roles, hide, if, nav menu, show, display
 Requires at least: 4
