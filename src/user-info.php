@@ -54,7 +54,7 @@ function if_menu_user_country_code_woocommerce($countryCode = '') {
 
 function if_menu_user_country_code_headers($countryCode = '') {
 	if (empty($countryCode)) {
-		foreach (array('HTTP_CF_IPCOUNTRY', 'X-AppEngine-country', 'CloudFront-Viewer-Country', 'GEOIP_COUNTRY_CODE', 'HTTP_X_COUNTRY_CODE') as $key) {
+		foreach (array('HTTP_CF_IPCOUNTRY', 'X-AppEngine-country', 'CloudFront-Viewer-Country', 'GEOIP_COUNTRY_CODE', 'HTTP_X_COUNTRY_CODE', 'HTTP_X_GEO_COUNTRY') as $key) {
 			if (isset($_SERVER[$key]) && $_SERVER[$key] && !in_array($_SERVER[$key], array('XX', 'ZZ', 'A1', 'A2', 'EU', 'AP'))) {
 				return $_SERVER[$key];
 			}
