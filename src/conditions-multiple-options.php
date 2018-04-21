@@ -295,6 +295,7 @@ function ifMenuAdvancedConditions($conditions) {
 
 
 	// Third-party plugin integration - WooCommerce Subscriptions
+	// Third-party plugin integration - Listing Payments (for WP Job Manager)
 	if (in_array('woocommerce-subscriptions/woocommerce-subscriptions.php', $activePlugins)) {
 		$subscriptionsOptions = array();
 
@@ -305,7 +306,7 @@ function ifMenuAdvancedConditions($conditions) {
 			'tax_query'		=>	array(array(
 				'taxonomy'		=>	'product_type',
 				'field'			=>	'slug',
-				'terms'			=>	array('subscription', 'variable-subscription')
+				'terms'			=>	array('subscription', 'variable-subscription', 'job_package_subscription', 'resume_package_subscription')
 			))
 		));
 

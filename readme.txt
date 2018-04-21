@@ -101,6 +101,7 @@ Got the icons from here https://dribbble.com/shots/1045549-Light-Switches-PSD, s
 
 = 0.9 - 2018-03-XX =
 * Added - Visibility rule - Customer has active membership, integration with [WooCommerce Memberships](https://woocommerce.com/products/woocommerce-memberships/) plugin
+* Added - Visibility rule - Customer has active Job Manager Listing Subscription, integration with [Listing Payments for WP Job Manager](https://astoundify.com/products/wp-job-manager-listing-payments/) plugin
 
 = 0.8.3 =
 *Release Date - 22 February 2018*
