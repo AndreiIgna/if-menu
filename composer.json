@@ -2,7 +2,7 @@
     "name": "layered/if-menu",
     "description": "Control menu items visibility with custom rules",
     "type": "wordpress-plugin",
-    "license": "GPLv3",
+    "license": "GPL-3.0-or-later",
     "authors": [
         {
             "name": "Andrei Igna",

@@ -7,7 +7,7 @@ Version: 0.9
 Text Domain: if-menu
 Author: Layered
 Author URI: https://layered.studio
-License: GPLv3
+License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 */
 
