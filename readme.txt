@@ -36,6 +36,7 @@ The plugin is easy to use, each menu item will have a new option “Change menu 
   * WooCommerce Memberships - Display menus for customers with active membership plans
   * Groups - Detect if users are in specific groups
   * WishList Member - Detect the users' membership level
+  * Restrict Content Pro - Detect the users' subscription level
 * Multiple rules - mix multiple rules for a menu item visibility
   * show if `User is logged in` AND `Device is mobile`
   * show if `User is Admin` AND `Is front page`
@@ -87,6 +88,7 @@ WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_T
 
 == Changelog ==
 
+* Added - Visibility rule - User has Subscription Level, integration with [Restrict Content Pro](https://restrictcontentpro.com/) plugin
 * Fixed - Display WooCommerce Membership plans and save the visibility rule
 * Fixed - Small render artifact in menu item title
 

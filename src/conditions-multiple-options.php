@@ -397,5 +397,35 @@ function ifMenuAdvancedConditions(array $conditions) {
 	}
 
 
+	// Third-party plugin integration - Restrict Content Pro
+	if (in_array('restrict-content-pro/restrict-content-pro.php', $activePlugins)) {
+		$levelsOptions = array();
+		$levels = new \RCP_Levels();
+		$levels = $levels->get_levels();
+
+		if ($levels) {
+			foreach ($levels as $level) {
+				$levelsOptions[$level->id] = $level->name;
+			}
+		}
+
+		$conditions[] = array(
+			'id'		=>	'restrict-content-pro',
+			'name'		=>	__('Has Restrict Subscription', 'if-menu'),
+			'condition'	=>	function($item, $selectedLevels = array()) {
+				$userId = get_current_user_id();
+
+				if (!$userId) {
+					return false;
+				}
+
+				return in_array(rcp_get_subscription_id($userId), $selectedLevels);
+			},
+			'options'	=>	$levelsOptions,
+			'group'		=>	__('User', 'if-menu')
+		);
+	}
+
+
 	return $conditions;
 }
