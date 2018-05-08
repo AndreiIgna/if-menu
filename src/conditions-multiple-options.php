@@ -369,7 +369,7 @@ function ifMenuAdvancedConditions(array $conditions) {
 		$plans = wc_memberships_get_membership_plans();
 
 		foreach ($plans as $plan) {
-			$membershipsOptions[$plan->ID] = $plan->name;
+			$membershipsOptions[$plan->id] = $plan->name;
 		}
 
 		$conditions[] = array(
