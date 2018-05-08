@@ -88,6 +88,7 @@ WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_T
 == Changelog ==
 
 * Fixed - Display WooCommerce Membership plans and save the visibility rule
+* Fixed - Small render artifact in menu item title
 
 = 0.9 - 21 April 2018 =
 *This version requires PHP version to be at least 5.4*
