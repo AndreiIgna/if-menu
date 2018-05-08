@@ -3,7 +3,7 @@
 Plugin Name: If Menu - Visibility control for menu items
 Plugin URI: https://wordpress.org/plugins/if-menu/
 Description: Display tailored menu items to each visitor with visibility rules
-Version: 0.9
+Version: 0.10
 Text Domain: if-menu
 Author: Layered
 Author URI: https://layered.studio
@@ -354,4 +354,4 @@ if (version_compare(PHP_VERSION, '5.4', '<')) {
 }
 
 add_action('plugins_loaded', 'If_Menu::init');
-add_action('plugins_loaded', '\Layered\IfMenu\Admin::start');
+add_action('plugins_loaded', 'Layered\IfMenu\Admin::start');

@@ -88,8 +88,9 @@ WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_T
 
 == Changelog ==
 
+= 0.10 - 8 May 2018 =
 * Added - Visibility rule - User has Subscription Level, integration with [Restrict Content Pro](https://restrictcontentpro.com/) plugin
-* Fixed - Display WooCommerce Membership plans and save the visibility rule
+* Fixed - Display all WooCommerce Membership plans and save the visibility rule
 * Fixed - Small render artifact in menu item title
 
 = 0.9 - 21 April 2018 =
