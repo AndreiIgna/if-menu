@@ -88,6 +88,8 @@ WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_T
 
 == Changelog ==
 
+* Fixed - Blank page on "Appearance -> Menus"
+
 = 0.10 - 8 May 2018 =
 * Added - Visibility rule - User has Subscription Level, integration with [Restrict Content Pro](https://restrictcontentpro.com/) plugin
 * Fixed - Display all WooCommerce Membership plans and save the visibility rule
