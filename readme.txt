@@ -1,5 +1,5 @@
 === If Menu - Visibility control for Menu Items ===
-Contributors: andrei.igna
+Contributors: andreiigna
 Tags: menu, visibility, rules, roles, hide, if, nav menu, show, display
 Requires at least: 4
 Tested up to: 4.9
@@ -88,7 +88,9 @@ WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_T
 
 == Changelog ==
 
+= 0.11 - 23 Jul 2018 =
 * Fixed - Blank page on "Appearance -> Menus"
+* Fixed - Better compatitility with themes / plugins
 
 = 0.10 - 8 May 2018 =
 * Added - Visibility rule - User has Subscription Level, integration with [Restrict Content Pro](https://restrictcontentpro.com/) plugin

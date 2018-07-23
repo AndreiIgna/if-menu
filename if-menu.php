@@ -3,7 +3,7 @@
 Plugin Name: If Menu - Visibility control for menu items
 Plugin URI: https://wordpress.org/plugins/if-menu/
 Description: Display tailored menu items to each visitor with visibility rules
-Version: 0.10
+Version: 0.11
 Text Domain: if-menu
 Author: Layered
 Author URI: https://layered.studio
@@ -11,7 +11,7 @@ License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 */
 
-include 'vendor/autoload.php';
+require plugin_dir_path(__FILE__) . 'vendor/autoload.php';
 
 class If_Menu {
 
@@ -252,7 +252,7 @@ class If_Menu {
     }
   }
 
-  public static function customWalker($walker) {
+  public static function customWalker($walker, $menuId = null) {
     global $wp_version;
 
     if (version_compare( $wp_version, '4.7.0', '>=')) {
@@ -300,7 +300,7 @@ class If_Menu {
 	public static function getPlan() {
 		if (isset($_REQUEST['if-menu-recheck-plan']) || false === ($plan = get_transient('if-menu-plan'))) {
 			$plan = false;
-			$request = wp_remote_get('https://wordpress.layered.studio/get-plan?site=' . urlencode(site_url()) . '&for=if-menu&_nonce=' . self::apiNonce('plan-check'));
+			$request = wp_remote_get('https://wordpress.layered.studio/get-plan?site=' . urlencode(site_url()) . '&for=if-menu&_nonce=' . self::apiNonce('plan-check'), array('timeout' => 30));
 
 			if (!is_wp_error($request)) {
 				$data = json_decode(wp_remote_retrieve_body($request), true);
