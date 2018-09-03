@@ -18,8 +18,9 @@ Control what menu items your site's visitors see, based on visibility rules. Her
 * Hide menu items if `Device is mobile`
 * Display menu items for `Admins and Editors`
 * Hide Login or Register links for `Logged in Users`
-* Display menu items for `Users from US and UK`
+* Display menu items for `Users from US or UK`
 * Display menu items only for `Customers with active membership`
+* Display menu items for visitors browsing with `Language English or Spanish`
 
 The plugin is easy to use, each menu item will have a new option “Change menu item visibility” which will enable the selection of rules (example in Screenshots)
 
@@ -32,6 +33,7 @@ The plugin is easy to use, each menu item will have a new option “Change menu 
   * Visitor device `Is Mobile`
 * Advanced visibility rules - requires Premium plan
   * Visitor location - detect visitor's Country
+  * Visitor language - detect visitor's selected Language
   * WooCommerce Subscriptions - Display menus for users with active subscription
   * WooCommerce Memberships - Display menus for customers with active membership plans
   * Groups - Detect if users are in specific groups
@@ -87,6 +89,8 @@ WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_T
 2. Example of visibility rules
 
 == Changelog ==
+
+* Added - Visiblity rule - Detect visitor's selected language
 
 = 0.11 - 23 Jul 2018 =
 * Fixed - Blank page on "Appearance -> Menus"

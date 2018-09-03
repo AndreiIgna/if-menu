@@ -427,5 +427,23 @@ function ifMenuAdvancedConditions(array $conditions) {
 	}
 
 
+	// Available languages
+	$availableLanguages = [];
+	foreach (get_available_languages() as $languageCode) {
+		$availableLanguages[$languageCode] = format_code_lang($languageCode);
+	}
+
+	$conditions[] = array(
+		'id'		=>	'languages',
+		'type'		=>	'multiple',
+		'name'		=>	__('Language', 'if-menu'),
+		'options'	=>	$availableLanguages,
+		'condition'	=>	function($item, $selectedLanguages = array()) {
+			return in_array(get_locale(), $selectedLanguages);
+		},
+		'group'		=>	__('Language', 'if-menu')
+	);
+
+
 	return $conditions;
 }
