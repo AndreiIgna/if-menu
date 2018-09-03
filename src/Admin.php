@@ -100,7 +100,13 @@ class Admin {
 									<li><a href="https://restrictcontentpro.com/" target="_blank">Restrict Content Pro</a> - <?php _e('User has Subscription Level', 'if-menu') ?></li>
 								</ul>
 							</li>
-							<li><?php _e('Priority support', 'if-menu') ?></li>
+							<li>
+								<?php if ($plan && $plan['plan'] == 'premium') : ?>
+									<a href="mailto:wp@layered.studio"><?php _e('Priority support', 'if-menu') ?> &#10147;</a>
+								<?php else : ?>
+									<?php _e('Priority support', 'if-menu') ?>
+								<?php endif ?>
+							</li>
 						</ul>
 
 						<p class="description">

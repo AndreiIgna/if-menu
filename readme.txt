@@ -91,6 +91,7 @@ WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_T
 == Changelog ==
 
 * Added - Visiblity rule - Detect visitor's selected language
+* Updated - Link to Support Request email
 
 = 0.11 - 23 Jul 2018 =
 * Fixed - Blank page on "Appearance -> Menus"
