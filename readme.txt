@@ -90,8 +90,10 @@ WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_T
 
 == Changelog ==
 
+= 0.12 - 3 September 2018 =
 * Added - Visiblity rule - Detect visitor's selected language
 * Updated - Link to Support Request email
+* Fixed - Better check for Premium plan after purchase (was not enabled in some cases)
 
 = 0.11 - 23 Jul 2018 =
 * Fixed - Blank page on "Appearance -> Menus"
