@@ -90,6 +90,9 @@ WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_T
 
 == Changelog ==
 
+= 0.12.2 - 3 September 2018 =
+* Fixed - PHP error blocking page load (function formatting language names)
+
 = 0.12 - 3 September 2018 =
 * Added - Visiblity rule - Detect visitor's selected language
 * Updated - Link to Support Request email
