@@ -1,12 +1,12 @@
 <?php
 /*
 Plugin Name: If Menu - Visibility control for menu items
-Plugin URI: https://wordpress.org/plugins/if-menu/
+Plugin URI: https://layered.market/plugins/if-menu
 Description: Display tailored menu items to each visitor with visibility rules
-Version: 0.12.2
+Version: 0.13
 Text Domain: if-menu
 Author: Layered
-Author URI: https://layered.studio
+Author URI: https://layered.market
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 */
@@ -29,10 +29,10 @@ class If_Menu {
 			add_action('admin_footer', 'If_Menu::adminFooter');
 
 			if (get_option('if-menu-admin', 1) && $pagenow !== 'nav-menus.php') {
-				add_filter( 'wp_get_nav_menu_items', 'If_Menu::wp_get_nav_menu_items' );
+				add_filter('wp_get_nav_menu_items', 'If_Menu::wp_get_nav_menu_items');
 			}
 		} else {
-			add_filter( 'wp_get_nav_menu_items', 'If_Menu::wp_get_nav_menu_items' );
+			add_filter('wp_get_nav_menu_items', 'If_Menu::wp_get_nav_menu_items');
 			add_action('wp_enqueue_scripts', 'If_Menu::addAssets');
 		}
 	}
@@ -103,10 +103,11 @@ class If_Menu {
 
 					if ((count($eval) === 1 && $eval[0] == 0) || (count($eval) > 1 && !eval('return ' . implode(' ', $eval) . ';'))) {
 						if ($canPeek) {
-								$item->classes[] = 'if-menu-peek';
-							} else {
-								unset($items[$key]);
-							}
+							$item->classes[] = 'if-menu-peek';
+						} else {
+							unset($items[$key]);
+						}
+
 						$hidden_items[] = $item->ID;
 					}
 				}
@@ -300,7 +301,7 @@ class If_Menu {
 	public static function getPlan() {
 		if (isset($_REQUEST['if-menu-recheck-plan']) || false === ($plan = get_transient('if-menu-plan'))) {
 			$plan = false;
-			$request = wp_remote_get('https://wordpress.layered.studio/get-plan?site=' . urlencode(site_url()) . '&for=if-menu&_nonce=' . self::apiNonce('plan-check'), array('timeout' => 60));
+			$request = wp_remote_get('https://layered.market/get-plan?site=' . urlencode(site_url()) . '&for=if-menu&_nonce=' . self::apiNonce('plan-check') . '&licenseKey=' . get_option('if-menu-license-key'), array('timeout' => 60));
 
 			if (!is_wp_error($request)) {
 				$data = json_decode(wp_remote_retrieve_body($request), true);
@@ -322,7 +323,7 @@ class If_Menu {
 				$nonce = isset($_REQUEST['nonce']) ? sanitize_key($_REQUEST['nonce']) : false;
 				return array('valid' => $action && $nonce && $nonce === get_transient('if-menu-nonce-' . $action));
 			}
-		) );
+		));
 	}
 
 }

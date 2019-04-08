@@ -2,7 +2,7 @@
 Contributors: andreiigna
 Tags: menu, visibility, rules, roles, hide, if, nav menu, show, display
 Requires at least: 4
-Tested up to: 4.9
+Tested up to: 5.1
 Requires PHP: 5.4
 Stable tag: trunk
 License: GPL-3.0-or-later
@@ -90,6 +90,9 @@ WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_T
 
 == Changelog ==
 
+= 0.13 - 8 April 2019 =
+* Updated - Compatiblity with latest WordPress version
+* Updated - Texts & more info about Premium plan
 * Added - Visibility rule - User has expired Subscription, integration with [Restrict Content Pro](https://restrictcontentpro.com/) plugin
 * Updated - Visibility rule - Restrict Content Pro Membership shows Level number
 
