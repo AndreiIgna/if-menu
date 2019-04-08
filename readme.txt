@@ -90,6 +90,9 @@ WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_T
 
 == Changelog ==
 
+* Added - Visibility rule - User has expired Subscription, integration with [Restrict Content Pro](https://restrictcontentpro.com/) plugin
+* Updated - Visibility rule - Restrict Content Pro Membership shows Level number
+
 = 0.12.2 - 3 September 2018 =
 * Fixed - PHP error blocking page load (function formatting language names)
 

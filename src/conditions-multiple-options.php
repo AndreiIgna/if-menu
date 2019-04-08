@@ -9,6 +9,7 @@ function ifMenuAdvancedConditions(array $conditions) {
 	// User location
 	$conditions[] = array(
 		'id'		=>	'user-location',
+		'type'		=>	'multiple',
 		'name'		=>	__('From country', 'if-menu'),
 		'options'	=>	array(
 			'AF'	=>	'Afghanistan',
@@ -277,6 +278,7 @@ function ifMenuAdvancedConditions(array $conditions) {
 
 		$conditions[] = array(
 			'id'		=>	'user-in-group',
+			'type'		=>	'multiple',
 			'name'		=>	__('Is in group', 'if-menu'),
 			'condition'	=>	function($item, $selectedGroups = array()) {
 				$isInGroup = false;
@@ -316,6 +318,7 @@ function ifMenuAdvancedConditions(array $conditions) {
 
 		$conditions[] = array(
 			'id'		=>	'woocommerce-subscriptions',
+			'type'		=>	'multiple',
 			'name'		=>	__('Has active subscription', 'if-menu'),
 			'condition'	=>	function($item, $selectedSubscriptions = array()) {
 				$hasSubscription = false;
@@ -345,6 +348,7 @@ function ifMenuAdvancedConditions(array $conditions) {
 
 		$conditions[] = array(
 			'id'		=>	'wishlist-member',
+			'type'		=>	'multiple',
 			'name'		=>	__('WishList Membership Level', 'if-menu'),
 			'condition'	=>	function($item, $membershipLevels = array()) {
 				$hasAccess = false;
@@ -374,6 +378,7 @@ function ifMenuAdvancedConditions(array $conditions) {
 
 		$conditions[] = array(
 			'id'		=>	'woocommerce-memberships',
+			'type'		=>	'multiple',
 			'name'		=>	__('Has active membership plan', 'if-menu'),
 			'condition'	=>	function($item, $selectedPlans = array()) {
 				$hasPlan = false;
@@ -405,12 +410,13 @@ function ifMenuAdvancedConditions(array $conditions) {
 
 		if ($levels) {
 			foreach ($levels as $level) {
-				$levelsOptions[$level->id] = $level->name;
+				$levelsOptions[$level->id] = $level->name . ' - Level ' . $level->level;
 			}
 		}
 
 		$conditions[] = array(
 			'id'		=>	'restrict-content-pro',
+			'type'		=>	'multiple',
 			'name'		=>	__('Has Restrict Subscription', 'if-menu'),
 			'condition'	=>	function($item, $selectedLevels = array()) {
 				$userId = get_current_user_id();
@@ -422,6 +428,13 @@ function ifMenuAdvancedConditions(array $conditions) {
 				return in_array(rcp_get_subscription_id($userId), $selectedLevels);
 			},
 			'options'	=>	$levelsOptions,
+			'group'		=>	__('User', 'if-menu')
+		);
+
+		$conditions[] = array(
+			'id'		=>	'restrict-content-pro-expired',
+			'name'		=>	__('Expired Restrict Subscription', 'if-menu'),
+			'condition'	=>	'rcp_is_expired',
 			'group'		=>	__('User', 'if-menu')
 		);
 	}
