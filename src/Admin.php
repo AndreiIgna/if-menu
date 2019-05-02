@@ -175,7 +175,7 @@ class Admin {
 				<strong>If Menu</strong>:
 				<a href="https://wordpress.org/plugins/if-menu/#faq" target="wpplugins"><?php _e('FAQs', 'if-menu') ?></a> &middot;
 				<a href="https://wordpress.org/support/plugin/if-menu" target="wpplugins"><?php _e('Support', 'if-menu') ?></a> &middot;
-				<span class="dashicons dashicons-star-filled" style="color: #ffb900"></span> <a href="https://wordpress.org/plugins/if-menu/#reviews" target="wpplugins"><?php _e('Lave a review', 'if-menu') ?></a>
+				<span class="dashicons dashicons-star-filled" style="color: #ffb900"></span> <a href="https://wordpress.org/plugins/if-menu/#reviews" target="wpplugins"><?php _e('Leave a review', 'if-menu') ?></a>
 			</p>
 		</div>
 

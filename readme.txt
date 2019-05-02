@@ -2,7 +2,7 @@
 Contributors: andreiigna
 Tags: menu, visibility, rules, roles, hide, if, nav menu, show, display
 Requires at least: 4
-Tested up to: 5.1
+Tested up to: 5.2
 Requires PHP: 5.4
 Stable tag: trunk
 License: GPL-3.0-or-later
@@ -90,9 +90,11 @@ WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_T
 
 == Changelog ==
 
+= 0.14 - 2 May 2019 =
 * Added - "User registration is allowed" visibility rule
 * Updated - Improved support for setting multiple visibility rules, without `eval` function from PHP
 * Updated - Show Membership Levels from "WishList Member" plugin
+* Updated - Compatibility with WordPress 5.2
 
 = 0.13 - 8 April 2019 =
 * Updated - Compatiblity with latest WordPress version
@@ -207,8 +209,6 @@ on)
 * Enhancement - show visibility status in menu item titles
 
 = 0.3 =
-
-Small update
 
 * Plugin icon
 * Set as compatible with WordPress 4
