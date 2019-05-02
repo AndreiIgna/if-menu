@@ -362,7 +362,8 @@ function ifMenuAdvancedConditions(array $conditions) {
 
 				return $hasAccess;
 			},
-			'group'		=>	__('User', 'if-menu')
+			'group'		=>	__('User', 'if-menu'),
+			'options'	=>	$membershipLevelOptions
 		);
 	}
 
