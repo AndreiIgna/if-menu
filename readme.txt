@@ -90,6 +90,7 @@ WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_T
 
 == Changelog ==
 
+* Added - "User registration is allowed" visibility rule
 * Updated - Improved support for setting multiple visibility rules, without `eval` function from PHP
 * Updated - Show Membership Levels from "WishList Member" plugin
 
