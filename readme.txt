@@ -90,6 +90,7 @@ WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_T
 
 == Changelog ==
 
+* Updated - Improved support for setting multiple visibility rules, without `eval` function from PHP
 * Updated - Show Membership Levels from "WishList Member" plugin
 
 = 0.13 - 8 April 2019 =
