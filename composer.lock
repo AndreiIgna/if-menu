@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "614de3969f9ac23adbe61056bf3e6742",
+    "content-hash": "1b70a56ba73f6f5b3986683fc3eedb17",
     "packages": [
         {
             "name": "composer/installers",
@@ -128,16 +128,16 @@
         },
         {
             "name": "layered/safe-eval",
-            "version": "v0.1",
+            "version": "v0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AndreiIgna/safe-eval.git",
-                "reference": "facf9a02828439ecebdb8968b3253f9b56169571"
+                "reference": "0170d4c80128adfa83bdaed688111ebc1df84e33"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AndreiIgna/safe-eval/zipball/facf9a02828439ecebdb8968b3253f9b56169571",
-                "reference": "facf9a02828439ecebdb8968b3253f9b56169571",
+                "url": "https://api.github.com/repos/AndreiIgna/safe-eval/zipball/0170d4c80128adfa83bdaed688111ebc1df84e33",
+                "reference": "0170d4c80128adfa83bdaed688111ebc1df84e33",
                 "shasum": ""
             },
             "require-dev": {
@@ -163,7 +163,7 @@
                 }
             ],
             "description": "Safely evaluate code expressions",
-            "time": "2019-04-26T13:20:08+00:00"
+            "time": "2019-05-02T09:46:38+00:00"
         }
     ],
     "packages-dev": [],

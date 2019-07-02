@@ -51,6 +51,7 @@ class Admin {
 		?>
 
 		<div class="wrap about-wrap if-menu-wrap">
+			<a href="<?php echo admin_url('nav-menus.php') ?>" class="button button-secondary if-menu-help"><?php _e('Manage Menus', 'if-menu') ?></a>
 			<h1>If Menu</h1>
 			<p class="about-text"><?php _e('Thanks for using <strong>If Menu</strong>! Now you can display tailored menu items to each visitor, based on visibility rules. Here are a few examples:', 'if-menu') ?></p>
 			<ul class="list">
@@ -90,7 +91,7 @@ class Admin {
 
 				<div class="col">
 					<div class="pricing-cell <?php if ($plan && $plan['plan'] == 'premium') echo 'selected' ?>">
-						<span class="price">$15<small>/<?php _e('annually', 'if-menu') ?></small></span>
+						<span class="price">from $15<small>/<?php _e('annually', 'if-menu') ?></small></span>
 						<h3><?php _e('Premium', 'if-menu') ?></h3>
 
 						<ul>

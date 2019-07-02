@@ -90,6 +90,10 @@ WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_T
 
 == Changelog ==
 
+= 0.15 - 2 July 2019 =
+* Updated - Texts & styles for If Menu settings page
+* Fixed - PHP error that may appear for Visibility Rules saved before If Menu v0.9
+
 = 0.14 - 2 May 2019 =
 * Added - "User registration is allowed" visibility rule
 * Updated - Improved support for setting multiple visibility rules, without `eval` function from PHP

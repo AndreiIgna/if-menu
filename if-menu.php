@@ -3,7 +3,7 @@
 Plugin Name: If Menu - Visibility control for menu items
 Plugin URI: https://layered.market/plugins/if-menu
 Description: Display tailored menu items to each visitor with visibility rules
-Version: 0.14
+Version: 0.15
 Text Domain: if-menu
 Author: Layered
 Author URI: https://layered.market
@@ -45,8 +45,12 @@ class If_Menu {
 		if ($for_testing) {
 			$c2 = array();
 			foreach ($conditions as $condition) {
-				$c2[$condition['id']] = $condition;
-				$c2[$condition['name']] = $condition;
+				if (isset($condition['id'])) {
+					$c2[$condition['id']] = $condition;
+				}
+				if (isset($condition['name'])) {
+					$c2[$condition['name']] = $condition;
+				}
 				if (isset($condition['alias'])) {
 					$c2[$condition['alias']] = $condition;
 				}
@@ -129,7 +133,7 @@ class If_Menu {
 			wp_enqueue_script('if-menu', plugins_url('assets/if-menu.js', __FILE__), array('select2', 'jquery-ui-dialog'), '0.9');
 
 			wp_enqueue_style('select2', plugins_url('assets/select2.min.css', __FILE__), array(), '4.0.5');
-			wp_enqueue_style('if-menu', plugins_url('assets/if-menu.css', __FILE__), array('wp-jquery-ui-dialog'), '0.9');
+			wp_enqueue_style('if-menu', plugins_url('assets/if-menu.css', __FILE__), array('wp-jquery-ui-dialog'), '0.15');
 
 			wp_localize_script('if-menu', 'IfMenu', array(
 				'plan'					=>	self::getPlan(),
@@ -303,6 +307,16 @@ class If_Menu {
 	}
 
 	public static function getPlan() {
+		global $layeredMarketMoreVisibilityRules;
+
+		if (class_exists('Layered\LayeredMarketForWp\Api') && isset($layeredMarketMoreVisibilityRules) && $layeredMarketMoreVisibilityRules instanceof Layered\LayeredMarketForWp\Api && $layeredMarketMoreVisibilityRules->isLicenseActive()) {
+			$license = $layeredMarketMoreVisibilityRules->getLicense();
+			$license['until'] = $license['end'];
+			$license['plan'] = 'premium';
+
+			return $license;
+		}
+
 		if (isset($_REQUEST['if-menu-recheck-plan']) || false === ($plan = get_transient('if-menu-plan'))) {
 			$plan = false;
 			$request = wp_remote_get('https://layered.market/get-plan?site=' . urlencode(site_url()) . '&for=if-menu&_nonce=' . self::apiNonce('plan-check') . '&licenseKey=' . get_option('if-menu-license-key'), array('timeout' => 60));
