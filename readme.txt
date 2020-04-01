@@ -30,6 +30,7 @@ The plugin is easy to use, each menu item will have a new option “Change menu 
   * User state `User is logged in`
   * User roles `Admin` `Editor` `Author` etc
   * Page type `Front page` `Single page` `Single post`
+  * Is Archive page (year, category, search results, etc)
   * Visitor device `Is Mobile`
 * Advanced visibility rules - requires Premium plan
   * Visitor location - detect visitor's Country
@@ -90,6 +91,7 @@ WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_T
 
 == Changelog ==
 
+* Added - Visibility rule - Is Archive page
 * Updated - Improved compatibility with WooCommerce Membership/Subscription plugins
 
 = 0.15 - 2 July 2019 =

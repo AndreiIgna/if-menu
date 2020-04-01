@@ -76,9 +76,16 @@ function if_menu_basic_conditions(array $conditions) {
 	);
 
 	$conditions[] = array(
-		'id'		=>	'single-page',
+		'id'		=>	'is-page',
 		'name'		=>	__('Page', 'if-menu'),
 		'condition'	=>	'is_page',
+		'group'		=>	__('Page type', 'if-menu')
+	);
+
+	$conditions[] = array(
+		'id'		=>	'page-archive',
+		'name'		=>	__('Is Archive page', 'if-menu'),
+		'condition'	=>	'is_archive',
 		'group'		=>	__('Page type', 'if-menu')
 	);
 
