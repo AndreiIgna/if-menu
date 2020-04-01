@@ -228,7 +228,7 @@ class If_Menu {
 					<?php if (isset($selectedCondition['options'])) : ?>
 						<select class="menu-item-if-menu-options" name="menu-item-if-menu-options[<?php echo esc_attr($item_id) ?>][<?php echo esc_attr($index) ?>][]" style="width: 305px" multiple>
 							<?php foreach ($selectedCondition['options'] as $value => $label) : ?>
-								<option value="<?php echo esc_attr($value) ?>" <?php if (in_array($value, $ifMenuOptions[$index])) echo 'selected' ?>><?php echo $label ?></option>
+								<option value="<?php echo esc_attr($value) ?>" <?php if (is_array($ifMenuOptions[$index]) && in_array($value, $ifMenuOptions[$index])) echo 'selected' ?>><?php echo $label ?></option>
 							<?php endforeach ?>
 						</select>
 					<?php endif ?>

@@ -90,6 +90,8 @@ WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_T
 
 == Changelog ==
 
+* Updated - Improved compatibility with WooCommerce Membership/Subscription plugins
+
 = 0.15 - 2 July 2019 =
 * Updated - Texts & styles for If Menu settings page
 * Fixed - PHP error that may appear for Visibility Rules saved before If Menu v0.9

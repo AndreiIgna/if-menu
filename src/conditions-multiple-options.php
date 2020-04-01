@@ -323,10 +323,14 @@ function ifMenuAdvancedConditions(array $conditions) {
 			'condition'	=>	function($item, $selectedSubscriptions = array()) {
 				$hasSubscription = false;
 
-				foreach ($selectedSubscriptions as $subscriptionId) {
-					if (wcs_user_has_subscription(0, $subscriptionId, 'active')) {
-						$hasSubscription = true;
+				if (is_array($selectedSubscriptions) && count($selectedSubscriptions)) {
+					foreach ($selectedSubscriptions as $subscriptionId) {
+						if (wcs_user_has_subscription(0, $subscriptionId, 'active')) {
+							$hasSubscription = true;
+						}
 					}
+				} elseif (wcs_user_has_subscription(0, '', 'active')) {
+					$hasSubscription = true;
 				}
 
 				return $hasSubscription;
@@ -383,16 +387,21 @@ function ifMenuAdvancedConditions(array $conditions) {
 			'name'		=>	__('Has active membership plan', 'if-menu'),
 			'condition'	=>	function($item, $selectedPlans = array()) {
 				$hasPlan = false;
-				$userId = get_current_user_id();
 
-				if (!$userId) {
+				if (!is_user_logged_in()) {
 					return false;
 				}
 
-				foreach ($selectedPlans as $planId) {
-					if (wc_memberships_is_user_active_member($userId, $planId)) {
-						$hasPlan = true;
+				if (is_array($selectedPlans) && count($selectedPlans)) {
+					// check if current user has one of selected memberships
+					foreach ($selectedPlans as $planId) {
+						if (wc_memberships_is_user_active_member(null, $planId)) {
+							$hasPlan = true;
+						}
 					}
+				} elseif (wc_memberships_get_user_memberships(null, ['status' => 'active'])) {
+					// check if current user has any active memberships
+					$hasPlan = true;
 				}
 
 				return $hasPlan;
