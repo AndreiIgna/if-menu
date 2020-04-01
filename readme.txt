@@ -2,7 +2,7 @@
 Contributors: andreiigna
 Tags: menu, visibility, rules, roles, hide, if, nav menu, show, display
 Requires at least: 4
-Tested up to: 5.2
+Tested up to: 5.4
 Requires PHP: 5.4
 Stable tag: trunk
 License: GPL-3.0-or-later
@@ -14,7 +14,7 @@ Display tailored menu items to each visitor with visibility rules
 
 Control what menu items your site's visitors see, based on visibility rules. Here are a few examples:
 
-* Display a menu item only if current `User is logged in`
+* Display a menu item only if `User is logged in`
 * Hide menu items if `Device is mobile`
 * Display menu items for `Admins and Editors`
 * Hide Login or Register links for `Logged in Users`
@@ -22,7 +22,7 @@ Control what menu items your site's visitors see, based on visibility rules. Her
 * Display menu items only for `Customers with active membership`
 * Display menu items for visitors browsing with `Language English or Spanish`
 
-The plugin is easy to use, each menu item will have a new option “Change menu item visibility” which will enable the selection of rules (example in Screenshots)
+The plugin is easy to use, each menu item will have a new option “Change menu item visibility” which will enable the selection of visibility rules (example in Screenshots).
 
 ## Features
 
@@ -45,17 +45,30 @@ The plugin is easy to use, each menu item will have a new option “Change menu 
   * show if `User is Admin` AND `Is front page`
 * Support for adding your custom rules
 
-Example of adding a new visibility rule is described in the FAQ section
+Example of adding a custom visibility rule is described in the FAQ section.
 
 == Frequently Asked Questions ==
 
 = If Menu is broken, no visibility rules are available =
 
-The code for modifying the menu items is limited and if other plugins/themes try to alter the menu items, this plugin will break.
+There’s a known limitation with adding functionality for menu items in WordPress, and conflicts may happen between some plugins and themes.
+
+If there are multiple plugins that extend Menu Items, for example If Menu and a plugin for Menu Icons, only one of them can add the needed functionality and the other one won't work as expected.
 
 This is an ongoing [issue with WordPress](http://core.trac.wordpress.org/ticket/18584) which hopefully will be fixed in a future release.
 
-Try to use just one plugin that changes functionality for menu items.
+If the "Menus" page is blank or options for visibility rules are not displaying, there is a way to test which plugin/theme causes this conflict.
+Please disable other plugins or themes until you find the one that causes the problem, and contact the respective developers.
+In the message include the link to WordPress ticket about menu items http://core.trac.wordpress.org/ticket/18584 where they can see detailed info on how to fix the problem.
+
+= Changes to menus are not saved =
+
+This problem may happen on sites with a large number of menu items.
+In most cases, this is not a limitation or problem caused by plugins or WordPress, but by the hosting server.
+
+Your hosting provider or server limits the amount of data that can be sent to WordPress for saving in database.
+The setting is named "PHP max_input_vars" and it's value should be increased, ex: `max_input_vars = 200` to `max_input_vars = 500`.
+Contact your hosting provider or make the change yourself if you have access. More details can be found here https://core.trac.wordpress.org/ticket/14134
 
 = How can I add a custom visibility rule for menu items? =
 
@@ -86,12 +99,15 @@ WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_T
 
 == Screenshots ==
 
-1. Enable visibility rules for Menu Items
-2. Example of visibility rules
+1. If Menu website demo
+2. Enable visibility rules for Menu Items
+3. Example of visibility rules
 
 == Changelog ==
 
+= 0.16 - 1 April 2020 =
 * Added - Visibility rule - Is Archive page
+* Updated - Ensure compatibility with WordPress 5.4
 * Updated - Improved compatibility with WooCommerce Membership/Subscription plugins
 
 = 0.15 - 2 July 2019 =

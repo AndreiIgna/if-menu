@@ -91,7 +91,9 @@ class Admin {
 
 				<div class="col">
 					<div class="pricing-cell <?php if ($plan && $plan['plan'] == 'premium') echo 'selected' ?>">
-						<span class="price">from $15<small>/<?php _e('annually', 'if-menu') ?></small></span>
+						<?php if (!$plan || $plan['plan'] != 'premium') : ?>
+							<span class="price">from $20<small>/<?php _e('annually', 'if-menu') ?></small></span>
+						<?php endif ?>
 						<h3><?php _e('Premium', 'if-menu') ?></h3>
 
 						<ul>
@@ -115,7 +117,7 @@ class Admin {
 							</li>
 							<li>
 								<?php if ($plan && $plan['plan'] == 'premium') : ?>
-									<a href="mailto:wp@layered.studio"><?php _e('Priority support', 'if-menu') ?> &#10147;</a>
+									<a href="https://layered.market/support" target="_blank"><?php _e('Priority support', 'if-menu') ?> &#10147;</a>
 								<?php else : ?>
 									<?php _e('Priority support', 'if-menu') ?>
 								<?php endif ?>
@@ -126,9 +128,9 @@ class Admin {
 							<?php if ($plan && $plan['plan'] == 'premium') : ?>
 								<button class="button disabled"><?php _e('Current plan', 'if-menu') ?></button>
 								<br><br><?php printf(__('Active until %s.', 'if-menu'), date(get_option('date_format'), strtotime($plan['end']))) ?>
-								<br>Auto renew is <?php echo $plan['autoRenew'] ? 'on' : 'off' ?>, manage on <a href="https://layered.market/purchases" target="_blank">Layered Market</a>.
+								<br>Auto renew is <?php echo $plan['autoRenew'] ? 'on' : 'off' ?>, manage on <a href="https://layered.market/licenses" target="_blank">Layered Market</a>.
 							<?php else : ?>
-								<a href="https://layered.market/get-premium?site=<?php echo urlencode(site_url()) ?>&_nonce=<?php echo \If_Menu::apiNonce('get-premium') ?>" class="button button-primary"><?php _e('Get premium', 'if-menu') ?></a>
+								<a href="https://layered.market/plugins/more-visibility-rules?site=<?php echo urlencode(site_url()) ?>&utm_source=if-widget&utm_medium=upgrade&utm_campaign=Upgrade%20from%20WordPress#pricing" class="button button-primary" target="_blank"><?php _e('Get premium', 'if-menu') ?></a>
 							<?php endif ?>
 						</p>
 					</div>

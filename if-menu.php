@@ -3,7 +3,7 @@
 Plugin Name: If Menu - Visibility control for menu items
 Plugin URI: https://layered.market/plugins/if-menu
 Description: Display tailored menu items to each visitor with visibility rules
-Version: 0.15
+Version: 0.16
 Text Domain: if-menu
 Author: Layered
 Author URI: https://layered.market
@@ -18,14 +18,19 @@ require plugin_dir_path(__FILE__) . 'vendor/autoload.php';
 class If_Menu {
 
 	public static function init() {
-		global $pagenow;
+		global $pagenow, $wp_version;
 
 		add_action('rest_api_init', 'If_Menu::restApi');
 
 		if (is_admin()) {
 			add_action('admin_enqueue_scripts', 'If_Menu::admin_init');
 			add_action('wp_update_nav_menu_item', 'If_Menu::wp_update_nav_menu_item', 10, 2);
-			add_filter('wp_edit_nav_menu_walker', 'If_Menu::customWalker', 500, 2);
+
+			// Add missing `wp_nav_menu_item_custom_fields` filter in Walker_Nav_Menu_Edit
+			if (version_compare($wp_version, '5.4', '<')) {
+				add_filter('wp_edit_nav_menu_walker', 'If_Menu::customWalker', 500, 2);
+			}
+
 			add_action('wp_nav_menu_item_custom_fields', 'If_Menu::menu_item_fields');
 			add_action('wp_nav_menu_item_custom_title', 'If_Menu::menu_item_title');
 			add_action('admin_footer', 'If_Menu::adminFooter');
