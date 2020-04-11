@@ -30,7 +30,7 @@
 
 .if-menu-dialog .ui-dialog-titlebar {
 	border-radius: 5px 5px 0 0;
-	padding: 3rem 0;
+	padding: 3rem 0 !important;
 	background: url(plan-premium.png);
 	background-size: cover;
 }

@@ -28,7 +28,11 @@ jQuery(function($) {
 
 
 	// Check if menu extra fields are actually displayed
-	if ($('#menu-to-edit li').length !== $('#menu-to-edit li .if-menu-enable').length) {
+	var countMenuItems = $('#menu-to-edit li.menu-item').length;
+	var countMenuItemsWithIfMenu = $('#menu-to-edit li.menu-item .if-menu-enable').length;
+	if (countMenuItems === countMenuItemsWithIfMenu / 2) {
+		$('<div class="notice notice-warning is-dismissible if-menu-notice"><p>' + IfMenu.duplicateErrorMessage + '</p></div>').insertAfter('.wp-header-end');
+	} else if (countMenuItems !== countMenuItemsWithIfMenu) {
 		$('<div class="notice error is-dismissible if-menu-notice"><p>' + IfMenu.conflictErrorMessage + '</p></div>').insertAfter('.wp-header-end');
 	}
 

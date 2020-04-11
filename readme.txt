@@ -105,6 +105,9 @@ WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_T
 
 == Changelog ==
 
+= 0.16.1 - 11 April 2020 =
+* Fixed - Improved compatibility with other plugins that extend menu items
+
 = 0.16 - 1 April 2020 =
 * Added - Visibility rule - Is Archive page
 * Updated - Ensure compatibility with WordPress 5.4
