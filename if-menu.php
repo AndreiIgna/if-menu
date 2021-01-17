@@ -352,7 +352,8 @@ class If_Menu {
 				$action = isset($_REQUEST['action']) ? sanitize_key($_REQUEST['action']) : false;
 				$nonce = isset($_REQUEST['nonce']) ? sanitize_key($_REQUEST['nonce']) : false;
 				return array('valid' => $action && $nonce && $nonce === get_transient('if-menu-nonce-' . $action));
-			}
+			},
+			'permission_callback' => '__return_true',
 		));
 	}
 

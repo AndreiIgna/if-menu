@@ -105,6 +105,7 @@ WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_T
 
 == Changelog ==
 
+* Fixed - Error shown about the registered REST Api endpoint
 = 0.16.1 - 11 April 2020 =
 * Fixed - Improved compatibility with other plugins that extend menu items
 
