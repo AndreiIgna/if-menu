@@ -17,5 +17,10 @@
         "psr-4": {
             "Layered\\IfMenu\\": "src/"
         }
+    },
+    "config": {
+        "platform": {
+            "php": "7.0"
+        }
     }
 }

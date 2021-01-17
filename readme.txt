@@ -1,9 +1,9 @@
 === If Menu - Visibility control for Menu Items ===
 Contributors: andreiigna
 Tags: menu, visibility, rules, roles, hide, if, nav menu, show, display
-Requires at least: 4
-Tested up to: 5.4
-Requires PHP: 5.4
+Requires at least: 5
+Tested up to: 5.6
+Requires PHP: 7.0
 Stable tag: trunk
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -105,7 +105,11 @@ WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_T
 
 == Changelog ==
 
+= 0.16.2 - 17 January 2020 =
 * Fixed - Error shown about the registered REST Api endpoint
+* Updated - Ensure compatibility with WordPress 5.6
+* Updated - Mark PHP as min v7.0 required. Plugin still works with PHP 5.x, but is encouranged to upgrade for better security and the upcoming features the plugin will get
+
 = 0.16.1 - 11 April 2020 =
 * Fixed - Improved compatibility with other plugins that extend menu items
 
