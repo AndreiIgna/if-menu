@@ -81,6 +81,32 @@ jQuery(function($) {
 
 		$(this).closest('.ui-dialog-content').dialog('close');
 	});
+	
+	// Remove unselected if-menu rules from getting submitted to PHP/processed. If there are a lot of menu items and some of them don't have any 
+	// settings atteched to them, PHP may throw an error saying that the max_input_vars has been exceeded or completely disregard if-menu rules 
+	// for some menu items since we could post over 1000 inputs with most of them being empty.
+	$('form#update-nav-menu').on('submit', function(event){
+		var $menu_visible = $( '[name^="menu-item-if-menu-enable"], [name^="menu-item-if-menu-condition-type"], [name^="menu-item-if-menu-condition"], [name^="menu-item-if-menu-options"]' );
+		$.each( $menu_visible, function( index, element ) {
+			var $input = $(element);
+			var input_value = $input.val();
+			var input_is_checked = $input.prop('checked');
+			var input_name = $input.prop('name');
+			var input_value_menu_item_db_id = input_name.replace(/\D/g,'');
+
+			if ('false' === input_value || false === input_value || ! input_is_checked) {
+				$input.prop('disabled', true);
+				// if the condition type is not set, then the if-menu setting should not be set for the menu item
+				if ($.isNumeric(input_value_menu_item_db_id) && input_name.indexOf('menu-item-if-menu-condition-type') > -1) {
+					var $input_if_menu_enable_field = $('input[name="menu-item-if-menu-enable[' + input_value_menu_item_db_id + '][]"]');
+
+					if ( $input_if_menu_enable_field.length ) {
+						$input_if_menu_enable_field.prop('disabled', true);
+					}
+				}
+			}
+		} );
+	} );
 
 
 });
