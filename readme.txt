@@ -105,6 +105,9 @@ WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_T
 
 == Changelog ==
 
+= 0.16.3 - 26 June 2022 =
+* Updated - Integration with Restrict Content Pro plugin is improved
+
 = 0.16.2 - 17 January 2020 =
 * Fixed - Error shown about the registered REST Api endpoint
 * Updated - Ensure compatibility with WordPress 5.6

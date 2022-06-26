@@ -414,20 +414,26 @@ function ifMenuAdvancedConditions(array $conditions) {
 
 	// Third-party plugin integration - Restrict Content Pro
 	if (in_array('restrict-content-pro/restrict-content-pro.php', $activePlugins)) {
+		$conditions[] = array(
+			'id'		=>	'restrict-content-pro-active',
+			'name'		=>	__('Any RCP membership active', 'if-menu'),
+			'condition'	=>	'rcp_user_has_active_membership',
+			'group'		=>	__('User', 'if-menu')
+		);
+
 		$levelsOptions = array();
-		$levels = new \RCP_Levels();
-		$levels = $levels->get_levels();
+		$levels = rcp_get_membership_levels();
 
 		if ($levels) {
 			foreach ($levels as $level) {
-				$levelsOptions[$level->id] = $level->name . ' - Level ' . $level->level;
+				$levelsOptions[$level->get_id()] = $level->get_name() . ' - Level ' . $level->get_access_level();
 			}
 		}
 
 		$conditions[] = array(
 			'id'		=>	'restrict-content-pro',
 			'type'		=>	'multiple',
-			'name'		=>	__('Has Restrict Subscription', 'if-menu'),
+			'name'		=>	__('Has Restrict Membership', 'if-menu'),
 			'condition'	=>	function($item, $selectedLevels = array()) {
 				$userId = get_current_user_id();
 
@@ -435,7 +441,7 @@ function ifMenuAdvancedConditions(array $conditions) {
 					return false;
 				}
 
-				return in_array(rcp_get_subscription_id($userId), $selectedLevels);
+				return in_array(rcp_get_customer_membership_level_ids($userId), $selectedLevels);
 			},
 			'options'	=>	$levelsOptions,
 			'group'		=>	__('User', 'if-menu')
@@ -443,8 +449,8 @@ function ifMenuAdvancedConditions(array $conditions) {
 
 		$conditions[] = array(
 			'id'		=>	'restrict-content-pro-expired',
-			'name'		=>	__('Expired Restrict Subscription', 'if-menu'),
-			'condition'	=>	'rcp_is_expired',
+			'name'		=>	__('Expired Restrict Membership', 'if-menu'),
+			'condition'	=>	'rcp_user_has_expired_membership',
 			'group'		=>	__('User', 'if-menu')
 		);
 	}
