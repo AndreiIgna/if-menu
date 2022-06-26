@@ -22,7 +22,9 @@ Control what menu items your site's visitors see, with visibility rules. Here ar
 * Display menus only for `Customers with active membership`
 * Display menus for visitors browsing with `Language English or Spanish`
 
-After the plugin is enabled, each menu item will have a new option “Change menu item visibility” which will enable the selection of visibility rules. Check the examples in screenshots or try it here → [demos.layered.store](https://demos.layered.store)
+After the plugin is enabled, each menu item will have a new option “Change menu item visibility” which will enable the selection of visibility rules.
+
+Check the examples in screenshots or try it here → [demos.layered.store](https://demos.layered.store)
 
 ## Features
 
@@ -52,15 +54,14 @@ After the plugin is enabled, each menu item will have a new option “Change men
 One of the most popular uses of the plugin is to show the "Register/Login" menu for non-logged-in users, and "Your account" for logged-in users.
 
 To enable this for "Register/Login" menu, follow these steps:
-1. Go to WordPress Admin on your website
-2. Go to Appearance -> Menus
-3. Expand the menu item for "Register" or "Login" page
-4. Enable the option "Enable visibility rules"
-5. Choose the rule "Hide if user logged in"
+1. Go to WordPress Admin on your website -> Appearance -> Menus
+2. Expand the menu item for "Register" or "Login" page
+3. Enable the option "Enable visibility rules"
+4. Choose the rule "Hide if user logged in"
 
 For showing the "Your account page", follow these steps:
 1. Go to WordPress Admin on your website -> Appearance -> Menus
-2. Expand the menu item for "Register" or "Login" page
+2. Expand the menu item for "Your account page" page
 3. Enable the option "Enable visibility rules"
 4. Choose the rule "Show if user logged in"
 
