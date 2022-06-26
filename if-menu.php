@@ -1,12 +1,12 @@
 <?php
 /*
-Plugin Name: If Menu - Visibility control for menu items
-Plugin URI: https://layered.market/plugins/if-menu
+Plugin Name: If Menu - Visibility control for menus
+Plugin URI: https://layered.store/plugins/if-menu
 Description: Display tailored menu items to each visitor with visibility rules
-Version: 0.16.2
+Version: 0.16.3
 Text Domain: if-menu
 Author: Layered
-Author URI: https://layered.market
+Author URI: https://layered.store
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 */

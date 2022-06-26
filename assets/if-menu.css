@@ -181,7 +181,6 @@
 .if-menu-conditions .if-menu-condition {
 	position: relative;
 	padding: 3px 0px;
-	width: calc(100% - 14px);
 	color: #0d2b3e;
 	animation: ifMenufadeIn 0.2s ease-in-out both;
 }
@@ -237,18 +236,23 @@
 }
 
 .if-menu-condition .menu-item-if-menu-condition-type {
-	width: 60px;
+	-webkit-appearance: auto;
+	width: 65px;
+	padding: 0 5px;
+	margin: 0;
 	color: #50a92f;
 }
 
 .if-menu-condition .menu-item-if-menu-condition-type[data-val="hide"] {
-	width: 60px;
+	width: 65px;
 	color: #e04c4c;
 }
 
 .if-menu-condition .menu-item-if-menu-condition {
+	-webkit-appearance: auto;
 	width: 225px;
 	color: #8b6cfb;
+	padding: 0 5px;
 }
 
 .if-menu-condition .menu-item-if-menu-enable-next {
