@@ -12,17 +12,17 @@ Display tailored menu items to each visitor with visibility rules
 
 == Description ==
 
-Control what menu items your site's visitors see, based on visibility rules. Here are a few examples:
+Control what menu items your site's visitors see, with visibility rules. Here are a few examples:
 
 * Display a menu item only if `User is logged in`
-* Hide menu items if `Device is mobile`
-* Display menu items for `Admins and Editors`
+* Hide menus if `Device is mobile`
+* Display menus for `Admins and Editors`
 * Hide Login or Register links for `Logged in Users`
-* Display menu items for `Users from US or UK`
-* Display menu items only for `Customers with active membership`
-* Display menu items for visitors browsing with `Language English or Spanish`
+* Display menus for `Users from US or UK`
+* Display menus only for `Customers with active membership`
+* Display menus for visitors browsing with `Language English or Spanish`
 
-The plugin is easy to use, each menu item will have a new option “Change menu item visibility” which will enable the selection of visibility rules (example in Screenshots).
+After the plugin is enabled, each menu item will have a new option “Change menu item visibility” which will enable the selection of visibility rules. Check the examples in screenshots or try it here → [demos.layered.store](https://demos.layered.store)
 
 ## Features
 
@@ -32,7 +32,7 @@ The plugin is easy to use, each menu item will have a new option “Change menu 
   * Page type `Front page` `Single page` `Single post`
   * Is Archive page (year, category, search results, etc)
   * Visitor device `Is Mobile`
-* Advanced visibility rules - requires Premium plan
+* Advanced visibility rules - requires [More Visibility Rules Add-on](https://layered.store/plugins/more-visibility-rules)
   * Visitor location - detect visitor's Country
   * Visitor language - detect visitor's selected Language
   * WooCommerce Subscriptions - Display menus for users with active subscription
@@ -43,11 +43,54 @@ The plugin is easy to use, each menu item will have a new option “Change menu 
 * Multiple rules - mix multiple rules for a menu item visibility
   * show if `User is logged in` AND `Device is mobile`
   * show if `User is Admin` AND `Is front page`
-* Support for adding your custom rules
-
-Example of adding a custom visibility rule is described in the FAQ section.
+* Support for [adding your custom rules](https://wordpress.org/plugins/if-menu/#how%20can%20i%20add%20a%20custom%20visibility%20rule%20for%20menu%20items%3F)
 
 == Frequently Asked Questions ==
+
+= Show or hide menus if user is logged in =
+
+One of the most popular uses of the plugin is to show the "Register/Login" menu for non-logged-in users, and "Your account" for logged-in users.
+
+To enable this for "Register/Login" menu, follow these steps:
+1. Go to WordPress Admin on your website
+2. Go to Appearance -> Menus
+3. Expand the menu item for "Register" or "Login" page
+4. Enable the option "Enable visibility rules"
+5. Choose the rule "Hide if user logged in"
+
+For showing the "Your account page", follow these steps:
+1. Go to WordPress Admin on your website -> Appearance -> Menus
+2. Expand the menu item for "Register" or "Login" page
+3. Enable the option "Enable visibility rules"
+4. Choose the rule "Show if user logged in"
+
+![image info](https://ps.w.org/if-menu/assets/screenshot-2.png)
+
+= Mix multiple visibility rules =
+
+Multiple visibility rules can be used at once, like so:
+
+For showing a menu item only for admins on desktop:
+1. Go to WordPress Admin on your website -> Appearance -> Menus
+2. Expand the menu item you want
+3. Enable the option "Enable visibility rules"
+4. Choose the rule "Show if user is Administrator"
+5. Click the "+" button at the end of the visibility rule, and change to "AND"
+6. On the newly added row, choose "Hide if device is mobile"
+
+For showing a menu item for Admins or users with an active subscription:
+1. Go to WordPress Admin on your website -> Appearance -> Menus
+2. Expand the menu item you want
+3. Enable the option "Enable visibility rules"
+4. Choose the rule "Show if user is Administrator"
+5. Click the "+" button at the end of the visibility rule, and change to "OR"
+6. On the newly added row, choose "Show if Has active subscription __"
+
+To remove an extra visibility rule:
+1. Go to WordPress Admin on your website -> Appearance -> Menus
+2. Expand the menu item with multiple visibility rules
+3. Click on the "AND" / "OR" buttons at end of visibility option
+4. Change to "+"
 
 = If Menu is broken, no visibility rules are available =
 
@@ -95,7 +138,7 @@ function my_new_menu_conditions($conditions) {
 
 = Where can I find conditional functions? =
 
-WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_Tags) which can be used to create custom rules for almost any combination that a theme/plugin developer can think of.
+WordPress provides [a lot of functions](https://developer.wordpress.org/themes/references/list-of-conditional-tags/) which can be used to create custom rules for almost any combination that a theme/plugin developer can think of.
 
 == Screenshots ==
 
@@ -106,6 +149,7 @@ WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_T
 == Changelog ==
 
 = 0.16.3 - 26 June 2022 =
+* Added - More usage examples in plugin FAQs section
 * Updated - Integration with Restrict Content Pro plugin is improved
 
 = 0.16.2 - 17 January 2020 =

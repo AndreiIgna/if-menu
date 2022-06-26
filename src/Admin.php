@@ -53,14 +53,15 @@ class Admin {
 		<div class="wrap about-wrap if-menu-wrap">
 			<a href="<?php echo admin_url('nav-menus.php') ?>" class="button button-secondary if-menu-help"><?php _e('Manage Menus', 'if-menu') ?></a>
 			<h1>If Menu</h1>
-			<p class="about-text"><?php _e('Thanks for using <strong>If Menu</strong>! Now you can display tailored menu items to each visitor, based on visibility rules. Here are a few examples:', 'if-menu') ?></p>
-			<ul class="list">
+			<p class="about-text"><?php _e('Now you can display personalized menus to each visitor, based on visibility rules. Here are a few examples:', 'if-menu') ?></p>
+			<ul class="list" style="margin-bottom: 0">
 				<li><?php _e('Hide Login or Register links for logged-in users:', 'if-menu') ?> <code><span class="if-menu-red"><?php _e('Hide', 'if-menu') ?></span> <?php _e('if', 'if-menu') ?> <span class="if-menu-purple"><?php _e('User is logged in', 'if-menu') ?></span></code></li>
 				<li><?php _e('Display Logout link for logged-in users:', 'if-menu') ?> <code><span class="if-menu-green"><?php _e('Show', 'if-menu') ?></span> <?php _e('if', 'if-menu') ?> <span class="if-menu-purple"><?php _e('User is logged in', 'if-menu') ?></span></code></li>
 				<li><?php _e('Hide menu item on mobile devices:', 'if-menu') ?> <code><span class="if-menu-red"><?php _e('Hide', 'if-menu') ?></span> <?php _e('if', 'if-menu') ?> <span class="if-menu-purple"><?php _e('Mobile', 'if-menu') ?></span></code></li>
 				<li><?php _e('Display menu item for users in US and UK:', 'if-menu') ?> <code><span class="if-menu-green"><?php _e('Show', 'if-menu') ?></span> <?php _e('if', 'if-menu') ?> <span class="if-menu-purple"><?php _e('User from country: US, UK', 'if-menu') ?></span></code></li>
 				<li><?php _e('Display menu item for visitors browsing in English or Spanish:', 'if-menu') ?> <code><span class="if-menu-green"><?php _e('Show', 'if-menu') ?></span> <?php _e('if', 'if-menu') ?> <span class="if-menu-purple"><?php _e('Language: English, Spanish', 'if-menu') ?></span></code></li>
 			</ul>
+			<p style="margin-top: 0"><a href="https://layered.store/plugins/if-menu/support#faq" target="_blank"><small>See more examples here</small></a></p>
 			<hr class="wp-header-end">
 
 			<div class="feature-section pricing-plan-section two-col">
