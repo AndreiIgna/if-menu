@@ -1,5 +1,5 @@
 === If Menu - Visibility control for Menus ===
-Contributors: andreiigna
+Contributors: andreiigna, elenalyrd
 Tags: menu, visibility, rules, roles, hide, if, nav menu, show, display
 Requires at least: 5
 Tested up to: 6.0
