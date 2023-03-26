@@ -3,7 +3,7 @@
 Plugin Name: If Menu - Visibility control for menus
 Plugin URI: https://layered.store/plugins/if-menu
 Description: Display tailored menu items to each visitor with visibility rules
-Version: 0.16.3
+Version: 0.17.0
 Text Domain: if-menu
 Author: Layered
 Author URI: https://layered.store

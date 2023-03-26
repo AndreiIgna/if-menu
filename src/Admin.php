@@ -14,7 +14,7 @@ class Admin {
 	}
 
 	public function actions() {
-		if (isset($_POST['if-menu-settings'])) {
+		if (isset($_POST['if-menu-settings']) && check_admin_referer('if-menu-settings-update')) {
 			update_option('if-menu-peak', isset($_POST['if-menu-peek']) && $_POST['if-menu-peek'] == 1 ? 1 : 0);
 			update_option('if-menu-admin', isset($_POST['if-menu-admin']) && $_POST['if-menu-admin'] == 1 ? 1 : 0);
 		}
@@ -143,6 +143,8 @@ class Admin {
 			<h3 class="title"><?php _e('Settings', 'if-menu') ?></h3>
 
 			<form method="post" action="">
+				<?php wp_nonce_field('if-menu-settings-update'); ?>
+
 				<table class="form-table">
 					<tbody>
 						<tr>
