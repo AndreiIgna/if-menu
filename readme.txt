@@ -2,7 +2,7 @@
 Contributors: andreiigna, elenalyrd
 Tags: menu, visibility, rules, roles, hide, if, nav menu, show, display
 Requires at least: 5
-Tested up to: 6.0
+Tested up to: 6.2
 Requires PHP: 5.6
 Stable tag: 0.17.0
 License: GPL-3.0-or-later
@@ -151,6 +151,7 @@ WordPress provides [a lot of functions](https://developer.wordpress.org/themes/r
 
 = 0.17.0 - 26 Mar 2023 =
 * Fixed - Broken Access Control
+* Fixed - Check if callbacks are valid for Conditions
 
 = 0.16.3 - 26 June 2022 =
 * Added - More usage examples in plugin FAQs section

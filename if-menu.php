@@ -93,6 +93,7 @@ class If_Menu {
 
 					foreach ($enabled as $index => $operator) {
 						$singleCondition = '';
+						$condition = $conditions[$if_conditions[$index]];
 
 						if ($index) {
 							$singleCondition .= $operator . ' ';
@@ -107,7 +108,14 @@ class If_Menu {
 							$params[] = $ifMenuOptions[$index];
 						}
 
-						$singleCondition .= call_user_func_array($conditions[$if_conditions[$index]]['condition'], $params) ? $bit1 : $bit2;
+						if (is_callable($condition['condition'])) {
+							$conditionResult = call_user_func_array($condition['condition'], $params);
+						} else {
+							$conditionResult = false;
+							error_log('If Menu: callback for condition "' . $condition['name'] . ' (' . $condition['id'] . ')" is not set up correctly');
+						}
+
+						$singleCondition .= $conditionResult ? $bit1 : $bit2;
 
 						$eval[] = $singleCondition;
 					}
