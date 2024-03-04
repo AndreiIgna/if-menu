@@ -69,8 +69,9 @@ function if_menu_user_country_code_metaapis($countryCode = '') {
 		$ip = get_user_ip();
 
 		if (false === ($countryCode = get_transient('ip-country-code-' . sanitize_key($ip)))) {
-			$request = wp_remote_get('https://api.layered.studio/ip/' . $ip . '?key=LAYEdab34d65f7464309b61c8595fRED');
-			$data = json_decode(wp_remote_retrieve_body($request) ?: '[]');
+			$response = wp_remote_get('https://x.layered.workers.dev/ip-info/' . $ip . '?key=LAYEdab34d65f7464309b61c8595fRED');
+			$data = json_decode(wp_remote_retrieve_body($response) ?: '[]');
+
 			if (isset($data->country) && $data->country) {
 				$countryCode = $data->country;
 				set_transient('ip-country-code-' . sanitize_key($ip), $countryCode, WEEK_IN_SECONDS);

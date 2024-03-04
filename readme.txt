@@ -2,9 +2,9 @@
 Contributors: andreiigna, elenalyrd
 Tags: menu, visibility, rules, roles, hide, if, nav menu, show, display
 Requires at least: 5
-Tested up to: 6.2
+Tested up to: 6.4
 Requires PHP: 5.6
-Stable tag: 0.17.0
+Stable tag: 0.18.0
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -148,6 +148,10 @@ WordPress provides [a lot of functions](https://developer.wordpress.org/themes/r
 3. Example of visibility rules
 
 == Changelog ==
+
+= 0.18.0 - 4 Mar 2024 =
+* Updated - WordPress v6.4 compatibility
+* Updated - Improved check for IP geolocation
 
 = 0.17.0 - 26 Mar 2023 =
 * Fixed - Broken Access Control
