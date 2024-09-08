@@ -1,10 +1,9 @@
 === If Menu - Visibility control for Menus ===
-Contributors: andreiigna, elenalyrd
-Tags: menu, visibility, rules, roles, hide, if, nav menu, show, display
-Requires at least: 5
-Tested up to: 6.4
-Requires PHP: 5.6
-Stable tag: 0.18.0
+Contributors: andreiigna
+Tags: menu, visibility, rules, roles, hide
+Tested up to: 6.6
+Requires PHP: 6.0
+Stable tag: 0.19.0
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -16,7 +15,7 @@ Control what menu items your site's visitors see, with visibility rules. Here ar
 
 * Display a menu item only if `User is logged in`
 * Hide menus if `Device is mobile`
-* Display menus for `Admins and Editors`
+* Display menus only for `Admins and Editors`
 * Hide Login or Register links for `Logged in Users`
 * Display menus for `Users from US or UK`
 * Display menus only for `Customers with active membership`
@@ -149,6 +148,10 @@ WordPress provides [a lot of functions](https://developer.wordpress.org/themes/r
 
 == Changelog ==
 
+= 0.19.0 - 4 Mar 2024 =
+* Updated - Improved WordPress v6.6 compatibility
+* Fixed - Integration with Restrict Content Pro plugin
+
 = 0.18.0 - 4 Mar 2024 =
 * Updated - WordPress v6.4 compatibility
 * Updated - Improved check for IP geolocation
@@ -173,7 +176,3 @@ WordPress provides [a lot of functions](https://developer.wordpress.org/themes/r
 * Added - Visibility rule - Is Archive page
 * Updated - Ensure compatibility with WordPress 5.4
 * Updated - Improved compatibility with WooCommerce Membership/Subscription plugins
-
-= 0.15 - 2 July 2019 =
-* Updated - Texts & styles for If Menu settings page
-* Fixed - PHP error that may appear for Visibility Rules saved before If Menu v0.9

@@ -417,31 +417,41 @@ function ifMenuAdvancedConditions(array $conditions) {
 		$conditions[] = array(
 			'id'		=>	'restrict-content-pro-active',
 			'name'		=>	__('Any RCP membership active', 'if-menu'),
-			'condition'	=>	'rcp_user_has_active_membership',
-			'group'		=>	__('User', 'if-menu')
+			'group'		=>	__('User', 'if-menu'),
+			'condition'	=>	function($item) {
+				return rcp_user_has_active_membership();
+			}
+		);
+
+		$conditions[] = array(
+			'id'		=>	'restrict-content-pro-paid',
+			'name'		=>	__('Has RCP paid membership', 'if-menu'),
+			'group'		=>	__('User', 'if-menu'),
+			'condition'	=>	function($item) {
+				return rcp_user_has_paid_membership();
+			}
 		);
 
 		$levelsOptions = array();
 		$levels = rcp_get_membership_levels();
 
-		if ($levels) {
-			foreach ($levels as $level) {
-				$levelsOptions[$level->get_id()] = $level->get_name() . ' - Level ' . $level->get_access_level();
-			}
+		foreach ($levels as $level) {
+			$levelsOptions[$level->get_id()] = $level->get_name() . ' ($' . $level->get_price() . ', level ' . $level->get_access_level() . ')';
 		}
 
 		$conditions[] = array(
 			'id'		=>	'restrict-content-pro',
 			'type'		=>	'multiple',
 			'name'		=>	__('Has Restrict Membership', 'if-menu'),
-			'condition'	=>	function($item, $selectedLevels = array()) {
-				$userId = get_current_user_id();
+			'condition'	=>	function($item, $subscriptions = array()) {
+				$customer  = rcp_get_customer(); // currently logged in customer
+				$is_active = rcp_user_has_active_membership();
 
-				if (!$userId) {
+				if (!$customer || !$is_active) {
 					return false;
 				}
 
-				return in_array(rcp_get_customer_membership_level_ids($userId), $selectedLevels);
+				return count(array_intersect(rcp_get_customer_membership_level_ids($customer->get_id()), $subscriptions));
 			},
 			'options'	=>	$levelsOptions,
 			'group'		=>	__('User', 'if-menu')
@@ -449,9 +459,11 @@ function ifMenuAdvancedConditions(array $conditions) {
 
 		$conditions[] = array(
 			'id'		=>	'restrict-content-pro-expired',
-			'name'		=>	__('Expired Restrict Membership', 'if-menu'),
-			'condition'	=>	'rcp_user_has_expired_membership',
-			'group'		=>	__('User', 'if-menu')
+			'name'		=>	__('Has expired Restrict Membership', 'if-menu'),
+			'group'		=>	__('User', 'if-menu'),
+			'condition'	=>	function($item) {
+				return rcp_user_has_expired_membership();
+			}
 		);
 	}
 
