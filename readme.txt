@@ -3,7 +3,7 @@ Contributors: andreiigna,atanasprchev
 Tags: menu, visibility, rules, roles, hide
 Tested up to: 6.7
 Requires PHP: 6.0
-Stable tag: 0.19.1
+Stable tag: 0.19.2
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -148,7 +148,7 @@ WordPress provides [a lot of functions](https://developer.wordpress.org/themes/r
 
 == Changelog ==
 
-= 0.19.1 - 5 Dec 2024 =
+= 0.19.2 - 5 Dec 2024 =
 * Updated - Improved WordPress v6.7 compatibility
 
 = 0.19.0 - 4 Mar 2024 =

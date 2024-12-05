@@ -18,18 +18,6 @@ class Admin {
 			update_option('if-menu-peak', isset($_POST['if-menu-peek']) && $_POST['if-menu-peek'] == 1 ? 1 : 0);
 			update_option('if-menu-admin', isset($_POST['if-menu-admin']) && $_POST['if-menu-admin'] == 1 ? 1 : 0);
 		}
-
-		if (isset($_REQUEST['if-menu-set-license-key']) && $_REQUEST['if-menu-set-license-key']) {
-			update_option('if-menu-license-key', $_REQUEST['if-menu-set-license-key']);
-			wp_redirect(admin_url('themes.php?page=if-menu&if-menu-recheck-plan'));
-			exit;
-		}
-
-		if (isset($_REQUEST['if-menu-delete-license-key']) && $_REQUEST['if-menu-delete-license-key'] == 'y') {
-			delete_option('if-menu-license-key');
-			wp_redirect(admin_url('themes.php?page=if-menu&if-menu-recheck-plan'));
-			exit;
-		}
 	}
 
 	public function assets() {
