@@ -69,7 +69,7 @@ function if_menu_user_country_code_metaapis($countryCode = '') {
 		$ip = get_user_ip();
 
 		if (false === ($countryCode = get_transient('ip-country-code-' . sanitize_key($ip)))) {
-			$response = wp_remote_get('https://api.laye.red/ip-info/' . $ip . '?key=LAYEdab34d65f7464309b61c8595fRED');
+			$response = wp_remote_get('https://web-api.com/ip-info/' . $ip . '?key=api_01j9rbgkf8vz3rxa5d6p9h8j20');
 			$data = json_decode(wp_remote_retrieve_body($response) ?: '[]');
 
 			if (isset($data->country) && $data->country) {
